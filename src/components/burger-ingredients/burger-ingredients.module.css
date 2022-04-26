@@ -4,7 +4,7 @@
 }
 
 .ingredients {
-    height: 650px;
+    height: calc(100vh - 301px);
     overflow-y: auto;
 }
 
