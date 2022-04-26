@@ -5,18 +5,25 @@ import IngredientsList from '../ingredients-list/ingredients-list';
 
 function BurgerIngredients() {
   const [current, setCurrent] = React.useState('one')
+  const xxx = (value: string) => {
+    console.log(value)
+    document.querySelector('#ingredients')?.querySelector(`#${value}`)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    })
+  }
   return (
       <section className={`${styles.section} pt-10 mr-10`}>
         <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
         <div style={{ display: 'flex' }}>
-          <Tab value="one" active={current === 'one'} onClick={setCurrent}>Булки</Tab>
-          <Tab value="two" active={current === 'two'} onClick={setCurrent}>Соусы</Tab>
-          <Tab value="three" active={current === 'three'} onClick={setCurrent}>Начинки</Tab>
+          <Tab value="one" active={current === 'one'} onClick={(value) => {setCurrent(value); xxx(value)}}>Булки</Tab>
+          <Tab value="two" active={current === 'two'} onClick={(value) => {setCurrent(value); xxx(value)}}>Соусы</Tab>
+          <Tab value="three" active={current === 'three'} onClick={(value) => {setCurrent(value); xxx(value)}}>Начинки</Tab>
         </div>
-        <div className={styles.ingredients}>
-          <IngredientsList name='Булки' type='bun' />
-          <IngredientsList name='Соусы' type='sauce' />
-          <IngredientsList name='Начинка' type='main' />
+        <div className={`${styles.ingredients} mt-10`} id="ingredients">
+          <IngredientsList name='Булки' type='bun' id='one' />
+          <IngredientsList name='Соусы' type='sauce' id='two'/>
+          <IngredientsList name='Начинка' type='main' id='three'/>
         </div>
       </section>
   );
