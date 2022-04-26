@@ -21,23 +21,6 @@
     box-sizing: border-box;
 }
 
-.profile-link {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: #F2F2F3;
-    text-decoration: none;
-    transition: opacity .2s linear;
-}
-
-.nav-link:hover {
-    opacity: .8;
-}
-
-.profile-link:hover {
-    opacity: .8;
-}
-
 @media (max-width: 1140px) {
     .header {
         grid-template-columns: 1.5fr 1fr 1fr;

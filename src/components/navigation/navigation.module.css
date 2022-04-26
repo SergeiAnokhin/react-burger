@@ -2,7 +2,7 @@
     justify-self: start;
 }
 
-.nav-list {
+.list {
     display: flex;
     flex-wrap: wrap;
     margin: 0;
@@ -10,13 +10,17 @@
     box-sizing: border-box;
 }
 
-.nav-item {
+.item {
     list-style-type: none;
 }
 
-.nav-link {
+.link {
     display: flex;
     color: #F2F2F3;
     text-decoration: none;
     transition: opacity .2s linear;
+}
+
+.link:hover {
+    opacity: .8;
 }
