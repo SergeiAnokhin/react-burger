@@ -1,0 +1,22 @@
+.nav {
+    justify-self: start;
+}
+
+.nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-item {
+    list-style-type: none;
+}
+
+.nav-link {
+    display: flex;
+    color: #F2F2F3;
+    text-decoration: none;
+    transition: opacity .2s linear;
+}
