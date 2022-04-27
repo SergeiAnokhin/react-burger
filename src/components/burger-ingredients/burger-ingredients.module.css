@@ -3,6 +3,10 @@
     max-width: 600px;
 }
 
+.tabs {
+    display: flex;
+}
+
 .ingredients {
     height: calc(100vh - 301px);
     overflow-y: auto;

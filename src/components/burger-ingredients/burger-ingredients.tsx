@@ -14,7 +14,7 @@ function BurgerIngredients() {
   return (
       <section className={`${styles.section} pt-10 mr-10`}>
         <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
-        <div style={{ display: 'flex' }}>
+        <div className={styles.tabs}>
           <Tab value="bun" active={current === 'bun'} onClick={(value) => {setCurrent(value); scrollTo(value)}}>Булки</Tab>
           <Tab value="sauce" active={current === 'sauce'} onClick={(value) => {setCurrent(value); scrollTo(value)}}>Соусы</Tab>
           <Tab value="main" active={current === 'main'} onClick={(value) => {setCurrent(value); scrollTo(value)}}>Начинки</Tab>

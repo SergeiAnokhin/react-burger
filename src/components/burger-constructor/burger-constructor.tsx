@@ -5,7 +5,7 @@ import data from '../../utils/data';
 function BurgerConstructor() {
   return (
       <section className={`${styles.section} pt-25 pl-4 pr-4`}>
-        <div className={styles.xxx}>
+        <div className={styles.bun}>
           <ConstructorElement
             type="top"
             isLocked={true}
@@ -17,7 +17,7 @@ function BurgerConstructor() {
         <div className={styles.elements}>
           {data.map((elem, index) =>
           elem.type === 'main' ?
-          <div style={{display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '16px'}}>
+          <div key={elem._id} className={styles.element}>
             <DragIcon type="primary" />
             <ConstructorElement 
               key={index}
@@ -27,7 +27,7 @@ function BurgerConstructor() {
             />
           </div> :
           elem.type === 'sauce' &&
-          <div style={{display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '16px'}}>
+          <div key={elem._id} className={styles.element}>
             <DragIcon type="primary" />
             <ConstructorElement 
               key={index}
@@ -38,7 +38,7 @@ function BurgerConstructor() {
           </div>
           )}
         </div>
-        <div className={styles.xxx}>
+        <div className={styles.bun}>
           <ConstructorElement
             type="bottom"
             isLocked={true}
