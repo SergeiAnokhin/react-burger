@@ -20,7 +20,6 @@ function BurgerConstructor() {
           <div key={elem._id} className={styles.element}>
             <DragIcon type="primary" />
             <ConstructorElement 
-              key={elem._id}
               text={elem.name} 
               price={elem.price} 
               thumbnail={elem.image_mobile}
@@ -30,7 +29,6 @@ function BurgerConstructor() {
           <div key={elem._id} className={styles.element}>
             <DragIcon type="primary" />
             <ConstructorElement 
-              key={elem._id}
               text={elem.name} 
               price={elem.price} 
               thumbnail={elem.image_mobile}
