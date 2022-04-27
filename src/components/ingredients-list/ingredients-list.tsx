@@ -2,7 +2,7 @@ import styles from './ingredients-list.module.css';
 import data from '../../utils/data';
 import Item from '../item/item';
 
-function IngredientsList(props: any) {
+function IngredientsList(props: {name: string, type: string, id: string}) {
     const type = props.type;
     return (
         <>
