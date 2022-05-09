@@ -3,7 +3,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 import IngredientsList from '../ingredients-list/ingredients-list';
 
-function BurgerIngredients() {
+function BurgerIngredients(props: {openModal: any}) {
   const [current, setCurrent] = React.useState('bun')
   const scrollTo = (value: string) => {
     document.querySelector('#ingredients')?.querySelector(`#${value}`)?.scrollIntoView({
@@ -20,9 +20,9 @@ function BurgerIngredients() {
           <Tab value="main" active={current === 'main'} onClick={(value) => {setCurrent(value); scrollTo(value)}}>Начинки</Tab>
         </div>
         <div className={`${styles.ingredients} mt-10`} id="ingredients">
-          <IngredientsList name='Булки' type='bun' id='bun' />
-          <IngredientsList name='Соусы' type='sauce' id='sauce'/>
-          <IngredientsList name='Начинка' type='main' id='main'/>
+          <IngredientsList name='Булки' type='bun' id='bun' openModal={props.openModal} />
+          <IngredientsList name='Соусы' type='sauce' id='sauce' openModal={props.openModal}/>
+          <IngredientsList name='Начинка' type='main' id='main' openModal={props.openModal}/>
         </div>
       </section>
   );
