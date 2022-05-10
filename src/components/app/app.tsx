@@ -21,13 +21,14 @@ function App() {
     const getIngredients = () => {
       setIsLoading(true);
       fetch('https://norma.nomoreparties.space/api/ingredients')
-        .then(res => res.json())
+        .then(res => {if (res.ok) {return res.json()}
+          return Promise.reject(`Ошибка: ${res.status}`);})
         .then(data => {setData(data.data); setIsLoading(false);})
         .catch(e => {
           setHasError(true); setIsLoading(false);
+          console.log('Ошибка получения данных с сервера', e.message);
         });
     };
-    
     getIngredients();
   }, [])
 

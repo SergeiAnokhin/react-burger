@@ -18,7 +18,7 @@ const Modal = (props: { title: string, onOverlayClick: any, onEscKeydown: any, c
 
   return ReactDOM.createPortal (
     <>
-      <div className={styles.modal}>
+      <div className={`${styles.modal} p-10`}>
         <h3 className={styles.title}>{props.title}</h3>
           {props.children} 
         <div className={styles.closeIcon} onClick={props.onOverlayClick}>
