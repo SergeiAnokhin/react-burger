@@ -5,7 +5,7 @@ import ModalOverlay from '../modal-overlay/modal-overlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
-const Modal = (props: { title: any, onOverlayClick: any, onEscKeydown: any, children: any, modalsContainer: any }) => {
+const Modal = (props: { title: string, onOverlayClick: any, onEscKeydown: any, children: any, modalsContainer: any }) => {
 
   React.useEffect(() => {
     document.addEventListener('keydown', props.onEscKeydown);

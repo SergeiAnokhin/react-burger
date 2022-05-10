@@ -4,7 +4,7 @@ import styles from './order-details.module.css';
 
 function OrderDetails() {
     return (
-        1
+        <div></div>
     );
 }
 

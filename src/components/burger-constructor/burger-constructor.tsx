@@ -2,7 +2,7 @@ import styles from './burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import data from '../../utils/data';
 
-function BurgerConstructor() {
+function BurgerConstructor(props: {openModal: any}) {
   return (
       <section className={`${styles.section} pt-25 pl-4 pr-4`}>
         <div className={styles.bun}>
@@ -47,7 +47,7 @@ function BurgerConstructor() {
         </div>
         <div className={`${styles.info} pr-4`}>
           <p className="text text_type_digits-medium mr-10"><span className='mr-2'>610</span><CurrencyIcon type="primary"/></p>
-          <Button type="primary" size="large">Оформить заказ</Button>
+          <Button type="primary" size="large" onClick={props.openModal}>Оформить заказ</Button>
         </div>
       </section>
   );

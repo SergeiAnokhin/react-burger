@@ -1,5 +1,6 @@
 .modal {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     position: fixed;
@@ -18,12 +19,20 @@
 
 .title {
     font-family: 'Jet Brains Mono';
+    align-self: flex-start;
     margin: 0;
     padding: 0;
     font-weight: 700;
     font-size: 36px;
     line-height: 40px;
     color: #F2F2F3;
+}
+
+.closeIcon {
+    position: absolute;
+    top: 50px;
+    right: 40px;
+    cursor: pointer;
 }
 
 .closeIcon:hover {
