@@ -52,9 +52,7 @@ function App() {
     return (
       <>
         <AppHeader />
-        {isLoading && 'Загрузка...'}
-        {hasError && 'Произошла ошибка'}
-        {data.length &&
+        {!isLoading && !hasError && data.length &&
           <AppMain ingredientData={data} openIngredientModal={openModal} openOrderModal={openModal1}/>
         }
  
