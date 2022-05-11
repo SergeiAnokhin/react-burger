@@ -32,12 +32,12 @@ function App() {
     getIngredients();
   }, [])
 
-  const openModal = (id: any) => {
+  const openIngredientModal = (id: any) => {
     setIsIngredientDetailsOpened(true);
     setId(id)
   };
 
-  const openModal1 = () => {
+  const openOrderModal = () => {
     setIsOrderDetailsOpened(true);
   };
 
@@ -46,21 +46,19 @@ function App() {
     setIsOrderDetailsOpened(false);
   };
 
-  const handleEscKeydown = (event: any) => {
-    event.key === "Escape" && closeAllModals();
-  };
+
     return (
       <>
         <AppHeader />
         {!isLoading && !hasError && data.length &&
-          <AppMain ingredientData={data} openIngredientModal={openModal} openOrderModal={openModal1}/>
+          <AppMain ingredientData={data} openIngredientModal={openIngredientModal} openOrderModal={openOrderModal}/>
         }
  
         {isIngredientDetailsOpened &&
         <Modal
           title="Детали ингредиента"
-          onOverlayClick={closeAllModals}
-          onEscKeydown={handleEscKeydown}
+          onClose={closeAllModals}
+          
           modalsContainer={modalsContainer}
         >       
           <IngredientDetails ingredientData={data} id={id}/>
@@ -69,8 +67,8 @@ function App() {
         {isOrderDetailsOpened &&
         <Modal
           title=""
-          onOverlayClick={closeAllModals}
-          onEscKeydown={handleEscKeydown}
+          onClose={closeAllModals}
+          
           modalsContainer={modalsContainer}
         >       
           <OrderDetails />

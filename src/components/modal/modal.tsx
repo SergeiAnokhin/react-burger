@@ -5,13 +5,16 @@ import ModalOverlay from '../modal-overlay/modal-overlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
-const Modal = (props: { title: string, onOverlayClick: any, onEscKeydown: any, children: any, modalsContainer: any }) => {
+const Modal = (props: { title: string, onClose: any, children: any, modalsContainer: any }) => {
 
   React.useEffect(() => {
-    document.addEventListener('keydown', props.onEscKeydown);
+    const onEscKeydown = (event: any) => {
+      event.key === "Escape" && props.onClose();
+    };
+    document.addEventListener('keydown', onEscKeydown);
 
     return () => {
-      document.removeEventListener('keydown', props.onEscKeydown);
+      document.removeEventListener('keydown', onEscKeydown);
     };
   }, []);
 
@@ -21,11 +24,11 @@ const Modal = (props: { title: string, onOverlayClick: any, onEscKeydown: any, c
       <div className={`${styles.modal} p-10`}>
         <h3 className={styles.title}>{props.title}</h3>
           {props.children} 
-        <div className={styles.closeIcon} onClick={props.onOverlayClick}>
+        <div className={styles.closeIcon} onClick={props.onClose}>
           <CloseIcon type="primary" />
         </div>
       </div>
-      <ModalOverlay onClick={props.onOverlayClick} /> 
+      <ModalOverlay onClick={props.onClose} /> 
     </>,
     props.modalsContainer
   );
