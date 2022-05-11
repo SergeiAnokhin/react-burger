@@ -46,7 +46,6 @@ function App() {
     setIsOrderDetailsOpened(false);
   };
 
-
     return (
       <>
         <AppHeader />
@@ -57,8 +56,7 @@ function App() {
         {isIngredientDetailsOpened &&
         <Modal
           title="Детали ингредиента"
-          onClose={closeAllModals}
-          
+          onClose={closeAllModals}   
           modalsContainer={modalsContainer}
         >       
           <IngredientDetails ingredientData={data} id={id}/>
@@ -68,7 +66,6 @@ function App() {
         <Modal
           title=""
           onClose={closeAllModals}
-          
           modalsContainer={modalsContainer}
         >       
           <OrderDetails />
