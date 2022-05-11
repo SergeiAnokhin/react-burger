@@ -1,8 +1,9 @@
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import data from '../../utils/data';
+import PropTypes from 'prop-types';
 
-function BurgerConstructor(props: {openModal: any}) {
+function BurgerConstructor(props) {
   return (
       <section className={`${styles.section} pt-25 pl-4 pr-4`}>
         <div className={styles.bun}>
@@ -51,6 +52,10 @@ function BurgerConstructor(props: {openModal: any}) {
         </div>
       </section>
   );
+}
+
+BurgerConstructor.propTypes = {
+  openModal: PropTypes.func
 }
 
 export default BurgerConstructor;

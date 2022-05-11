@@ -32,7 +32,7 @@ function App() {
     getIngredients();
   }, [])
 
-  const openIngredientModal = (id: any) => {
+  const openIngredientModal = (id) => {
     setIsIngredientDetailsOpened(true);
     setId(id)
   };

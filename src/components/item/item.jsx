@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './item.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
 
-function Item(props: { id: string; image: string; price: number; name: string; openModal: any }) {
+function Item(props) {
     const [count, setCount] = React.useState(0)
     return (
         <div className={`${styles.item} p-4 mb-8`} onClick={() => {setCount(count + 1); props.openModal(props.id)}}>
@@ -12,6 +13,14 @@ function Item(props: { id: string; image: string; price: number; name: string; o
             {count > 0 && <Counter count={count} size="default" />}
         </div>
     );
+}
+
+Item.propTypes = {
+    id: PropTypes.string,
+    image: PropTypes.string,
+    price: PropTypes.number,
+    name: PropTypes.string,
+    openModal: PropTypes.func
 }
 
 export default Item;

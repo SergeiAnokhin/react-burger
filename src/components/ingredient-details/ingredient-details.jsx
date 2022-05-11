@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
+import PropTypes from 'prop-types';
 
 
-function IngredientDetails(props: {ingredientData: any, id: string}) {
+function IngredientDetails(props) {
 
-    const ingredient = props.ingredientData.find((elem: any) => elem._id === props.id)
+    const ingredient = props.ingredientData.find((elem) => elem._id === props.id)
     
     return (
                 <>
@@ -30,6 +31,11 @@ function IngredientDetails(props: {ingredientData: any, id: string}) {
                     </div>
                 </> 
     );
+}
+
+IngredientDetails.propTypes = {
+    ingredientData: PropTypes.arrayOf(PropTypes.object),
+    id: PropTypes.string
 }
 
 export default IngredientDetails;

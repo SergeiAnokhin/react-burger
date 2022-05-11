@@ -2,10 +2,11 @@ import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 import IngredientsList from '../ingredients-list/ingredients-list';
+import PropTypes from 'prop-types';
 
-function BurgerIngredients(props: {ingredientData: any; openModal: any}) {
+function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('bun')
-  const scrollTo = (value: string) => {
+  const scrollTo = (value) => {
     document.querySelector('#ingredients')?.querySelector(`#${value}`)?.scrollIntoView({
       behavior: 'smooth',
       block: 'start'
@@ -26,6 +27,11 @@ function BurgerIngredients(props: {ingredientData: any; openModal: any}) {
         </div>
       </section>
   );
+}
+
+BurgerIngredients.propTypes = {
+  ingredientData: PropTypes.array,
+  openModal: PropTypes.func
 }
 
 export default BurgerIngredients;
