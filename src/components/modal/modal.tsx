@@ -18,7 +18,6 @@ const Modal = (props: { title: string, onClose: any, children: any, modalsContai
     };
   }, []);
 
-
   return ReactDOM.createPortal (
     <>
       <div className={`${styles.modal} p-10`}>
