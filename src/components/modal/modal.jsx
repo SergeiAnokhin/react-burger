@@ -5,6 +5,7 @@ import ModalOverlay from '../modal-overlay/modal-overlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 
+const modalsContainer = document.querySelector('#modals');
 
 const Modal = (props) => {
 
@@ -30,15 +31,14 @@ const Modal = (props) => {
       </div>
       <ModalOverlay onClick={props.onClose} /> 
     </>,
-    props.modalsContainer
+    modalsContainer
   );
 };
 
 Modal.propTypes = { 
   title: PropTypes.string,
-  onClose: PropTypes.func,
-  children: PropTypes.node,
-  modalsContainer: PropTypes.node
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node
  }
 
 export default Modal;

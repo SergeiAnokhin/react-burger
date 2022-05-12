@@ -19,8 +19,8 @@ IngredientsList.propTypes = {
     name: PropTypes.string, 
     type: PropTypes.string, 
     id: PropTypes.string, 
-    ingredientData: PropTypes.any, 
-    openModal: PropTypes.any
+    ingredientData: PropTypes.arrayOf(PropTypes.object).isRequired, 
+    openModal: PropTypes.func.isRequired
 }
 
 export default IngredientsList;

@@ -5,17 +5,13 @@ import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
 
-const modalsContainer = document.querySelector('#modals');
-
 function App() {
   const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = React.useState(false);
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false)
   const [hasError, setHasError] = React.useState(false)
   const [data, setData] = React.useState([])
-
   const [id, setId] = React.useState('')
-
   
   React.useEffect(() => {
     const getIngredients = () => {
@@ -56,8 +52,7 @@ function App() {
         {isIngredientDetailsOpened &&
         <Modal
           title="Детали ингредиента"
-          onClose={closeAllModals}   
-          modalsContainer={modalsContainer}
+          onClose={closeAllModals}
         >       
           <IngredientDetails ingredientData={data} id={id}/>
         </Modal>}
@@ -66,7 +61,6 @@ function App() {
         <Modal
           title=""
           onClose={closeAllModals}
-          modalsContainer={modalsContainer}
         >       
           <OrderDetails />
         </Modal>}

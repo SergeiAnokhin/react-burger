@@ -20,7 +20,7 @@ Item.propTypes = {
     image: PropTypes.string,
     price: PropTypes.number,
     name: PropTypes.string,
-    openModal: PropTypes.func
+    openModal: PropTypes.func.isRequired
 }
 
 export default Item;

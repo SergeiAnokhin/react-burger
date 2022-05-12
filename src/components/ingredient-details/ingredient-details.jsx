@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './ingredient-details.module.css';
 import PropTypes from 'prop-types';
 
-
 function IngredientDetails(props) {
 
     const ingredient = props.ingredientData.find((elem) => elem._id === props.id)
@@ -34,7 +33,7 @@ function IngredientDetails(props) {
 }
 
 IngredientDetails.propTypes = {
-    ingredientData: PropTypes.arrayOf(PropTypes.object),
+    ingredientData: PropTypes.arrayOf(PropTypes.object).isRequired,
     id: PropTypes.string
 }
 

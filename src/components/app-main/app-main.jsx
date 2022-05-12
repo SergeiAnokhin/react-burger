@@ -14,9 +14,9 @@ function AppMain(props) {
 }
 
 AppMain.propTypes = {
-  ingredientData: PropTypes.array,
-  openIngredientModal: PropTypes.func,
-  openOrderModal: PropTypes.func
-  }
+  ingredientData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  openIngredientModal: PropTypes.func.isRequired,
+  openOrderModal: PropTypes.func.isRequired
+}
 
 export default AppMain;
