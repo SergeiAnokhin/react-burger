@@ -1,70 +1,32 @@
-import React from 'react';
+import { useEffect } from 'react';
 import AppHeader from '../app-header/app-header';
 import AppMain from '../app-main/app-main';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngredientsThunk } from '../../services/midleware/ingredients-thunk';
 
 function App() {
-  const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = React.useState(false);
-  const [isOrderDetailsOpened, setIsOrderDetailsOpened] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [hasError, setHasError] = React.useState(false)
-  const [data, setData] = React.useState([])
-  const [id, setId] = React.useState('')
-  
-  React.useEffect(() => {
-    const getIngredients = () => {
-      setIsLoading(true);
-      fetch('https://norma.nomoreparties.space/api/ingredients')
-        .then(res => {if (res.ok) {return res.json()}
-          return Promise.reject(`Ошибка: ${res.status}`);})
-        .then(data => {setData(data.data); setIsLoading(false);})
-        .catch(e => {
-          setHasError(true); setIsLoading(false);
-          console.log('Ошибка получения данных с сервера', e.message);
-        });
-    };
-    getIngredients();
+
+  const dispatch = useDispatch()
+  const isIngredientDetailsOpened = useSelector(store => store.itemReducer.isOpened)
+  const isOrderDetailsOpened = useSelector(store => store.orderReducer.isOpened)
+
+  useEffect(() => {
+      dispatch(getIngredientsThunk())
   }, [])
 
-  const openIngredientModal = (id) => {
-    setIsIngredientDetailsOpened(true);
-    setId(id)
-  };
-
-  const openOrderModal = () => {
-    setIsOrderDetailsOpened(true);
-  };
-
-  const closeAllModals = () => {
-    setIsIngredientDetailsOpened(false);
-    setIsOrderDetailsOpened(false);
-  };
+  const data = useSelector(state => state.ingredientsReducer.ingredients)
+  const isLoading = useSelector(state => state.ingredientsReducer.isLoading)
+  const hasError = useSelector(state => state.ingredientsReducer.hasError)
 
     return (
       <>
-        <AppHeader />
-        {!isLoading && !hasError && data.length &&
-          <AppMain ingredientData={data} openIngredientModal={openIngredientModal} openOrderModal={openOrderModal}/>
-        }
- 
-        {isIngredientDetailsOpened &&
-        <Modal
-          title="Детали ингредиента"
-          onClose={closeAllModals}
-        >       
-          <IngredientDetails ingredientData={data} id={id}/>
-        </Modal>}
-
-        {isOrderDetailsOpened &&
-        <Modal
-          title=""
-          onClose={closeAllModals}
-        >       
-          <OrderDetails />
-        </Modal>}
-
+        <AppHeader />        
+        {!isLoading && !hasError && data.length && <AppMain />} 
+        {isIngredientDetailsOpened && <Modal title="Детали ингредиента"><IngredientDetails /></Modal>}
+        {isOrderDetailsOpened && <Modal title=""><OrderDetails /></Modal>}
       </>
     );
   }

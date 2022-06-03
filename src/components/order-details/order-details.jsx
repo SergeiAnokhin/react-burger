@@ -1,12 +1,15 @@
 import React from 'react';
 import styles from './order-details.module.css';
 import done from '../../images/done.svg'
-
+import { useSelector } from 'react-redux';
 
 function OrderDetails() {
+
+    const order = useSelector(store => store.orderReducer)
+
     return (
         <>
-            <div className={`${styles.id} mt-20 mb-8`}>034356</div>
+            <div className={`${styles.id} mt-20 mb-8`}>{order.order.number}</div>
             <div className={`${styles.title} mb-15`}>идентификатор заказа</div>
             <img className='mb-15' src={done} alt="" />
             <div className={`${styles.status} mb-2`}>Ваш заказ начали готовить</div>

@@ -1,15 +1,15 @@
-import React from 'react';
 import styles from './modal-overlay.module.css';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { isOpenedModal } from '../../services/actions/item-actions';
+import { isOpenedOrderModal } from '../../services/actions/order-actions';
 
-function ModalOverlay(props) {
+function ModalOverlay() {
+
+    const dispatch = useDispatch()
+
     return (
-        <div className={styles.overlay} onClick={props.onClick} />
+        <div className={styles.overlay} onClick={() => {dispatch(isOpenedModal(false)); dispatch(isOpenedOrderModal(false));}} />
     );
-}
-
-ModalOverlay.propTypes = {
-     onClick: PropTypes.func.isRequired
 }
 
 export default ModalOverlay;
