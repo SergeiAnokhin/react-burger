@@ -1,4 +1,4 @@
-import { ADD_BUN, ADD_INGREDIENT, DELETE_INGREDIENT, RESET_CONSTRUCTOR} from "../actions/types-actions";
+import { ADD_BUN, ADD_INGREDIENT, DELETE_INGREDIENT, SORT_CONSTRUCTOR, RESET_CONSTRUCTOR} from "../actions/types-actions";
 
 const initialState = {
     bun: [],
@@ -26,6 +26,9 @@ export const constructorReducer = (state = initialState, action) => {
           allIngredientsId: [...state.allIngredientsId.slice(0, state.allIngredientsId.findIndex(item => item === action.payload)), 
             ...state.allIngredientsId.slice(state.allIngredientsId.findIndex(item => item === action.payload) + 1)]
         }
+      case SORT_CONSTRUCTOR:
+          return {...state, 
+            ingredients: action.payload}
       case RESET_CONSTRUCTOR:
         return {...state, ingredients: [], bun: [], allIngredientsId: []}
       default:

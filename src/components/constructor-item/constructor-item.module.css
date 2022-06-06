@@ -1,0 +1,19 @@
+.element {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    margin-left: 16px;
+    transition: all .3s linear;
+}
+
+.bgcolor {
+    background-color: bisque;
+}
+
+.scale {
+    transform: scale(0.98);
+}
+
+.hidden {
+    opacity: 0.3;
+}

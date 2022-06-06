@@ -45,13 +45,6 @@
     background-color: #8585AD;
 }
 
-.element {
-    display: flex;
-    align-items: center;
-    gap: 8px; 
-    margin-left: 16px;
-}
-
 .info {
     display: flex;
     justify-content: flex-end;

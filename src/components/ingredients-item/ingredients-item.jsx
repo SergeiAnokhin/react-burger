@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import styles from './item.module.css';
+import styles from './ingredients-item.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 // import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,7 @@ import { isOpenedModal, getIdItem } from '../../services/actions/item-actions';
 import { addIngredient, addBun } from '../../services/actions/constructor-actions';
 import { useDrag } from "react-dnd";
 
-function Item(props) {
+function IngredientsItem(props) {
     const [count, setCount] = React.useState(0)
     const allIngredientsId = useSelector(store => store.constructorReducer.allIngredientsId)
     const dispatch = useDispatch()
@@ -22,7 +22,7 @@ function Item(props) {
     const id = props.id;
 
     const [, dragRef] = useDrag({
-        type: "ingredient",
+        type: "ingredient-item",
         item: {id},
     });
 
@@ -48,4 +48,4 @@ function Item(props) {
 //     name: PropTypes.string,
 // }
 
-export default Item;
+export default IngredientsItem;
