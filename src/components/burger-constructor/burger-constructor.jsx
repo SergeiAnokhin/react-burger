@@ -4,6 +4,9 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktiku
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteIngredient } from '../../services/actions/constructor-actions';
 import { getOrderThunk } from '../../services/midleware/order-thunk';
+import { useDrop } from "react-dnd";
+import { addIngredient, addBun  } from '../../services/actions/constructor-actions';
+import { nanoid } from 'nanoid'
 
 function BurgerConstructor() {
 
@@ -11,6 +14,9 @@ function BurgerConstructor() {
   const ingredients = useSelector(store => store.constructorReducer.ingredients)
   const data = useSelector(store => store.constructorReducer.allIngredientsId)
   const dispatch = useDispatch()
+
+  const data1 = useSelector(store => store.ingredientsReducer.ingredients)
+  // const ingredient = data1.find(item => item._id === props.id)
 
   const price = useMemo(() => {
     const bunPrice = bun.length > 0 ? bun[0].price * 2 : 0
@@ -22,8 +28,18 @@ function BurgerConstructor() {
     dispatch(getOrderThunk(data))
   }
 
+  
+
+  const [, dropTarget] = useDrop({
+    accept: "ingredient",
+    drop(id) {
+      const ingredient = data1.find(item => item._id === id.id)
+      ingredient.type === 'bun' ? dispatch(addBun(ingredient)) : dispatch(addIngredient(ingredient))
+    },
+});
+
   return (
-      <section className={`${styles.section} pt-25 pl-4 pr-4`}>
+      <section className={`${styles.section} pt-25 pl-4 pr-4`} ref={dropTarget}>
         { bun.length === 0 && ingredients.length === 0 
         ? <div className={styles.text}>Добавьте ингредиенты</div>
         :<>
@@ -33,12 +49,12 @@ function BurgerConstructor() {
           <div className={styles.elements}>
             {ingredients.map((elem, index) =>
             elem.type === 'main' ?
-            <div key={elem._id} className={styles.element}>
+            <div key={nanoid()} className={styles.element}>
               <DragIcon type="primary" />
               <ConstructorElement text={elem.name} price={elem.price} thumbnail={elem.image_mobile} handleClose={() => dispatch(deleteIngredient(elem._id))} />
             </div> :
             elem.type === 'sauce' &&
-            <div key={elem._id} className={styles.element}>
+            <div key={nanoid()} className={styles.element}>
               <DragIcon type="primary" />
               <ConstructorElement text={elem.name} price={elem.price} thumbnail={elem.image_mobile} handleClose={() => dispatch(deleteIngredient(elem._id))} />
             </div>
