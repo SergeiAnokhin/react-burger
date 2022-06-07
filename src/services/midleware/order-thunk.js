@@ -28,5 +28,5 @@ export const getOrderThunk = (data) => {
             dispatch(loadingOrder(false))
             console.log('Ошибка получения данных с сервера', e.message);
           });
-    } : null
+    } : () => {}
 }
