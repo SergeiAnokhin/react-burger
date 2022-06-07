@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-function IngredientDetails(props) {
+function IngredientDetails() {
 
-    const ingredient = props.ingredientData.find((elem) => elem._id === props.id)
+    const itemId = useSelector(store => store.itemReducer.itemId)
+    const ingredient = useSelector(store => store.ingredientsReducer.ingredients).find((elem) => elem._id === itemId)
     
     return (
                 <>
@@ -30,11 +31,6 @@ function IngredientDetails(props) {
                     </div>
                 </> 
     );
-}
-
-IngredientDetails.propTypes = {
-    ingredientData: PropTypes.arrayOf(PropTypes.object).isRequired,
-    id: PropTypes.string
 }
 
 export default IngredientDetails;

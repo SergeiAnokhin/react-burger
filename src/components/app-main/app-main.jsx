@@ -1,22 +1,19 @@
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import styles from './app-main.module.css';
-import PropTypes from 'prop-types';
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
 
-function AppMain(props) {
+function AppMain() {
   return (
     <main className={`${styles.main} pl-5 pr-5`}>
-        <BurgerIngredients ingredientData={props.ingredientData} openModal={props.openIngredientModal}/>
-        <BurgerConstructor openModal={props.openOrderModal}/>
+      <DndProvider backend={HTML5Backend}>
+        <BurgerIngredients />
+        <BurgerConstructor />
+      </DndProvider>
     </main>
 
   );
-}
-
-AppMain.propTypes = {
-  ingredientData: PropTypes.arrayOf(PropTypes.object).isRequired,
-  openIngredientModal: PropTypes.func.isRequired,
-  openOrderModal: PropTypes.func.isRequired
 }
 
 export default AppMain;
