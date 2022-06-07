@@ -1,19 +1,19 @@
-import { GET_INGREDIENTS, IS_LOADING, HAS_ERROR } from "../actions/types-actions";
+import { SET_INGREDIENTS, LOADING_INGREDIENTS, ERROR_INGREDIENTS } from "../actions/types-actions";
 
 const initialState = {
-    isLoading: false,
-    hasError: false,
+    loading: false,
+    error: false,
     ingredients: []
 }
 
 export const ingredientsReducer = (state = initialState, action) => {
     switch(action.type) {
-      case GET_INGREDIENTS:
+      case SET_INGREDIENTS:
         return {...state, ingredients: action.payload}
-      case IS_LOADING:
-        return {...state, isLoading: action.payload}
-      case HAS_ERROR:
-        return {...state, hasError: action.payload}
+      case LOADING_INGREDIENTS:
+        return {...state, loading: action.payload}
+      case ERROR_INGREDIENTS:
+        return {...state, error: action.payload}
       default:
         return state;
     }

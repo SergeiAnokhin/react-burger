@@ -5,8 +5,8 @@ import ModalOverlay from '../modal-overlay/modal-overlay';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { isOpenedModal } from '../../services/actions/item-actions';
-import { isOpenedOrderModal } from '../../services/actions/order-actions';
+import { openIngredientModal } from '../../services/actions/item-actions';
+import { openOrderModal } from '../../services/actions/order-actions';
 
 const modalsContainer = document.querySelector('#modals');
 
@@ -16,7 +16,7 @@ const Modal = (props) => {
 
   React.useEffect(() => {
     const onEscKeydown = (event) => {
-      event.key === "Escape" && dispatch(isOpenedModal(false)) && dispatch(isOpenedOrderModal(false));
+      event.key === "Escape" && dispatch(openIngredientModal(false)) && dispatch(openOrderModal(false));
     };
     document.addEventListener('keydown', onEscKeydown);
 
@@ -30,11 +30,11 @@ const Modal = (props) => {
       <div className={`${styles.modal} p-10`}>
         <h3 className={styles.title}>{props.title}</h3>
           {props.children} 
-        <div className={styles.closeIcon} onClick={() => {dispatch(isOpenedModal(false)); dispatch(isOpenedOrderModal(false));}}>
+        <div className={styles.closeIcon} onClick={() => {dispatch(openIngredientModal(false)); dispatch(openOrderModal(false));}}>
           <CloseIcon type="primary" />
         </div>
       </div>
-      <ModalOverlay onClick={() => {dispatch(isOpenedModal(false)); dispatch(isOpenedOrderModal(false));}} /> 
+      <ModalOverlay onClick={() => {dispatch(openIngredientModal(false)); dispatch(openOrderModal(false));}} /> 
     </>,
     modalsContainer
   );

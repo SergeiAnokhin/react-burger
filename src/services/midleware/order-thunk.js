@@ -1,11 +1,12 @@
-import { getOrder, isOpenedOrderModal, isLoading, hasError } from "../actions/order-actions";
+import { getOrder, openOrderModal, loadingOrder, errorOrder } from "../actions/order-actions";
 import { resetConstructor } from "../actions/constructor-actions";
+import { URL_ORDER } from "./api";
 
 export const getOrderThunk = (data) => {
     
     return data.length > 0 ? (dispatch) => {
-        dispatch(isLoading(true))
-        return fetch('https://norma.nomoreparties.space/api/orders', {
+        dispatch(loadingOrder(true))
+        return fetch(URL_ORDER, {
             method: 'POST', 
             body: JSON.stringify({ 
                 "ingredients": data
@@ -17,14 +18,14 @@ export const getOrderThunk = (data) => {
         .then(res => {if (res.ok) {return res.json()}
         return Promise.reject(`Ошибка: ${res.status}`);})
         .then((res) => {
-            dispatch(isLoading(false))
+            dispatch(loadingOrder(false))
             dispatch(getOrder(res))
-            dispatch(isOpenedOrderModal(true))
+            dispatch(openOrderModal(true))
             dispatch(resetConstructor())
         })
         .catch(e => {
-            dispatch(hasError(true))
-            dispatch(isLoading(false))
+            dispatch(errorOrder(true))
+            dispatch(loadingOrder(false))
             console.log('Ошибка получения данных с сервера', e.message);
           });
     } : null

@@ -5,19 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOrderThunk } from '../../services/midleware/order-thunk';
 import { useDrop } from "react-dnd";
 import { addIngredient, addBun  } from '../../services/actions/constructor-actions';
-import { nanoid } from 'nanoid';
 import ConstructorItem from '../constructor-item/constructor-item';
 
 function BurgerConstructor() {
 
   const ref = useRef()
-
-  const bun = useSelector(store => store.constructorReducer.bun)
-  const ingredients = useSelector(store => store.constructorReducer.ingredients)
-  const data = useSelector(store => store.constructorReducer.allIngredientsId)
   const dispatch = useDispatch()
 
-  const data1 = useSelector(store => store.ingredientsReducer.ingredients)
+  const { bun, ingredients, allIngredientsId } = useSelector(store => store.constructorReducer)
+  const allIngredientsList = useSelector(store => store.ingredientsReducer.ingredients)
 
   const price = useMemo(() => {
     const bunPrice = bun.length > 0 ? bun[0].price * 2 : 0
@@ -26,13 +22,13 @@ function BurgerConstructor() {
   }, [bun, ingredients]);  
 
   const getOrder = () => {
-    dispatch(getOrderThunk(data))
+    dispatch(getOrderThunk(allIngredientsId))
   }
 
   const [, dropTarget] = useDrop({
     accept: "ingredient-item",
     drop(id) {
-      const ingredient = data1.find(item => item._id === id.id)
+      const ingredient = allIngredientsList.find(item => item._id === id.id)
       ingredient.type === 'bun' ? dispatch(addBun(ingredient)) : dispatch(addIngredient(ingredient))
     },
 });
@@ -46,7 +42,7 @@ function BurgerConstructor() {
             {bun.length > 0 ? <ConstructorElement type="top" isLocked={true} text={bun[0].name} price={bun[0].price} thumbnail={bun[0].image} /> : null}
           </div>
           <div className={styles.elements} >
-            {ingredients.map((elem, index) => <ConstructorItem key={nanoid()} elem={elem} index={index}/> )}
+            {ingredients.map((elem, index) => <ConstructorItem key={elem.nanoid} elem={elem} index={index}/> )}
           </div>
           <div className={styles.bun}>
             {bun.length > 0 ? <ConstructorElement type="bottom" isLocked={true} text={bun[0].name} price={bun[0].price} thumbnail={bun[0].image} /> : null}

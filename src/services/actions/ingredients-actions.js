@@ -1,13 +1,13 @@
-import { GET_INGREDIENTS, HAS_ERROR, IS_LOADING } from "../actions/types-actions";
+import { SET_INGREDIENTS, LOADING_INGREDIENTS, ERROR_INGREDIENTS } from "../actions/types-actions";
 
-export const getIngredients = (res) => {
-    return {type: GET_INGREDIENTS, payload: res}
+export const setIngredients = (res) => {
+    return {type: SET_INGREDIENTS, payload: res}
 }
 
-export const isLoading = (value) => {
-    return {type: IS_LOADING, payload: value}
+export const loadingIngredients = (value) => {
+    return {type: LOADING_INGREDIENTS, payload: value}
 }
 
-export const hasError = (value) => {
-    return {type: HAS_ERROR, payload: value}
+export const errorIngredients = (value) => {
+    return {type: ERROR_INGREDIENTS, payload: value}
 }

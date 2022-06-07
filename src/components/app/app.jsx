@@ -5,28 +5,24 @@ import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIngredientsThunk } from '../../services/midleware/ingredients-thunk';
+import { setIngredientsThunk } from '../../services/midleware/ingredients-thunk';
 
 function App() {
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-      dispatch(getIngredientsThunk())
+      dispatch(setIngredientsThunk())
   }, [])
 
-  const data = useSelector(state => state.ingredientsReducer.ingredients)
-  const isLoadingIngredients = useSelector(state => state.ingredientsReducer.isLoading)
-  const hasErrorIngredients = useSelector(state => state.ingredientsReducer.hasError)
-  const isLoadingOrder = useSelector(state => state.orderReducer.isLoading)
-  const hasErrorOrder = useSelector(state => state.orderReducer.hasError)
-  const isIngredientDetailsOpened = useSelector(store => store.itemReducer.isOpened)
-  const isOrderDetailsOpened = useSelector(store => store.orderReducer.isOpened)
+  const {ingredients, loading: isLoadingIngredients , error: hasErrorIngredients } = useSelector(state => state.ingredientsReducer)
+  const isIngredientDetailsOpened = useSelector(store => store.itemReducer.open)
+  const {loading: isLoadingOrder, error: hasErrorOrder, open: isOrderDetailsOpened } = useSelector(state => state.orderReducer)
 
     return (
       <>
         <AppHeader />        
-        {!isLoadingIngredients && !hasErrorIngredients && data.length && <AppMain />} 
+        {!isLoadingIngredients && !hasErrorIngredients && ingredients.length && <AppMain />} 
         {!isLoadingIngredients && !hasErrorIngredients && isIngredientDetailsOpened && <Modal title="Детали ингредиента"><IngredientDetails /></Modal>}
         {!isLoadingOrder && !hasErrorOrder && isOrderDetailsOpened && <Modal title=""><OrderDetails /></Modal>}
       </>

@@ -1,9 +1,9 @@
-import { IS_OPENED_MODAL, GET_ID_ITEM } from "../actions/types-actions";
+import { OPEN_INGREDIENT_MODAL, INGREDIENT_ID} from "../actions/types-actions";
 
-export const isOpenedModal = (value) => {
-    return {type: IS_OPENED_MODAL, payload: value}
+export const openIngredientModal = (value) => {
+    return {type: OPEN_INGREDIENT_MODAL, payload: value}
 }
 
-export const getIdItem = (id) => {
-    return {type: GET_ID_ITEM, payload: id}
+export const ingredientId = (id) => {
+    return {type: INGREDIENT_ID, payload: id}
 }

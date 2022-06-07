@@ -10,7 +10,7 @@ function ConstructorItem ({elem, index}) {
     const dispatch = useDispatch()
     const ref = useRef()
     const id = elem.nanoid
-    const data1 = useSelector(store => store.constructorReducer.ingredients)
+    const { ingredients } = useSelector(store => store.constructorReducer)
 
     const [{isDragging}, dragRef1] = useDrag({
         type: "constructor-item",
@@ -29,15 +29,16 @@ function ConstructorItem ({elem, index}) {
             canDrop: monitor.canDrop()
         }),
         drop(id) {
-            const dragIndex = data1.findIndex((item, i) => item.nanoid === id.id)
-            const dropIndex = index
+            const dragElementIndex = ingredients.findIndex((item, i) => item.nanoid === id.id)
+            const dropElementIndex = index
 
-            const data2 = [...data1]
-            const drag = data2[dropIndex]
-            data2[dropIndex] = data2[dragIndex]
-            data2[dragIndex] = drag
+            const constructorIngredients = [...ingredients]
+            const drag = constructorIngredients[dropElementIndex]
+            
+            constructorIngredients[dropElementIndex] = constructorIngredients[dragElementIndex]
+            constructorIngredients[dragElementIndex] = drag
 
-            dispatch(sortConstructor(data2))
+            dispatch(sortConstructor(constructorIngredients))
         },
         });     
 

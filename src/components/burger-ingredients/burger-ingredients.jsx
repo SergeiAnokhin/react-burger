@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 import IngredientsList from '../ingredients-list/ingredients-list';
@@ -6,10 +6,10 @@ import IngredientsList from '../ingredients-list/ingredients-list';
 function BurgerIngredients() {
 
   const initialHeight = document.documentElement.clientHeight/2 < 500 ? document.documentElement.clientHeight/2 : 500
-  const [current, setCurrent] = React.useState('bun')
-  const [bunTop, setBunTop] = React.useState(initialHeight)
-  const [sauceTop, setSauceTop] = React.useState(initialHeight)
-  const [mainTop, setMainTop] = React.useState(initialHeight)
+  const [current, setCurrent] = useState('bun')
+  const [bunTop, setBunTop] = useState(initialHeight)
+  const [sauceTop, setSauceTop] = useState(initialHeight)
+  const [mainTop, setMainTop] = useState(initialHeight)
   const ref = useRef()
 
   const bun = 'bun'
@@ -17,6 +17,7 @@ function BurgerIngredients() {
   const main = 'main'
 
   const scrollTo = (value) => {
+    setCurrent(value)
     ref.current.children[value].scrollIntoView({
       behavior: 'smooth',
       block: 'start'
@@ -44,9 +45,9 @@ function BurgerIngredients() {
       <section className={`${styles.section} pt-10 mr-10`}>
         <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
         <div className={styles.tabs}>
-          <Tab value={bun} active={current === bun} onClick={(value) => {setCurrent(value); scrollTo(value)}}>Булки</Tab>
-          <Tab value={sauce} active={current === sauce} onClick={(value) => {setCurrent(value); scrollTo(value)}}>Соусы</Tab>
-          <Tab value={main} active={current === main} onClick={(value) => {setCurrent(value); scrollTo(value)}}>Начинки</Tab>
+          <Tab value={bun} active={current === bun} onClick={value => scrollTo(value)}>Булки</Tab>
+          <Tab value={sauce} active={current === sauce} onClick={value => scrollTo(value)}>Соусы</Tab>
+          <Tab value={main} active={current === main} onClick={value => scrollTo(value)}>Начинки</Tab>
         </div>
         <div className={`${styles.ingredients} mt-10`} id="ingredients" ref={ref}>
           <IngredientsList name='Булки' type={bun} id={bun} />

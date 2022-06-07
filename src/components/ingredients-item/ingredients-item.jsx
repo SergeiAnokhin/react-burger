@@ -3,7 +3,7 @@ import styles from './ingredients-item.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { isOpenedModal, getIdItem } from '../../services/actions/item-actions';
+import { openIngredientModal, ingredientId } from '../../services/actions/item-actions';
 import { useDrag } from "react-dnd";
 
 function IngredientsItem(props) {
@@ -12,8 +12,8 @@ function IngredientsItem(props) {
     const dispatch = useDispatch()
     
     const handleClickItem = () => {
-        dispatch(isOpenedModal(true))
-        dispatch(getIdItem(props.id))
+        dispatch(openIngredientModal(true))
+        dispatch(ingredientId(props.id))
     }
 
     const id = props.id;
