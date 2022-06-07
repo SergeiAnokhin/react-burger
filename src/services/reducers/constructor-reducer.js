@@ -28,7 +28,7 @@ export const constructorReducer = (state = initialState, action) => {
         }
       case SORT_CONSTRUCTOR:
           return {...state, 
-            ingredients: action.payload}
+            ingredients: action.payload, allIngredientsId: [...state.bun.map(item => item._id), ...action.payload.map(item => item._id)]}
       case RESET_CONSTRUCTOR:
         return {...state, ingredients: [], bun: [], allIngredientsId: []}
       default:

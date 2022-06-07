@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import styles from './ingredients-item.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { isOpenedModal, getIdItem } from '../../services/actions/item-actions';
-import { addIngredient, addBun } from '../../services/actions/constructor-actions';
 import { useDrag } from "react-dnd";
 
 function IngredientsItem(props) {
@@ -15,8 +14,6 @@ function IngredientsItem(props) {
     const handleClickItem = () => {
         dispatch(isOpenedModal(true))
         dispatch(getIdItem(props.id))
-        // ingredient.type === 'bun' ? dispatch(addBun(ingredient)) : dispatch(addIngredient(ingredient))
-        // setCount(count + 1)
     }
 
     const id = props.id;
@@ -41,11 +38,11 @@ function IngredientsItem(props) {
     );
 }
 
-// Item.propTypes = {
-//     id: PropTypes.string,
-//     image: PropTypes.string,
-//     price: PropTypes.number,
-//     name: PropTypes.string,
-// }
+IngredientsItem.propTypes = {
+    id: PropTypes.string,
+    image: PropTypes.string,
+    price: PropTypes.number,
+    name: PropTypes.string,
+}
 
 export default IngredientsItem;
