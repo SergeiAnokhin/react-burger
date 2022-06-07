@@ -10,23 +10,25 @@ import { getIngredientsThunk } from '../../services/midleware/ingredients-thunk'
 function App() {
 
   const dispatch = useDispatch()
-  const isIngredientDetailsOpened = useSelector(store => store.itemReducer.isOpened)
-  const isOrderDetailsOpened = useSelector(store => store.orderReducer.isOpened)
 
   useEffect(() => {
       dispatch(getIngredientsThunk())
   }, [])
 
   const data = useSelector(state => state.ingredientsReducer.ingredients)
-  const isLoading = useSelector(state => state.ingredientsReducer.isLoading)
-  const hasError = useSelector(state => state.ingredientsReducer.hasError)
+  const isLoadingIngredients = useSelector(state => state.ingredientsReducer.isLoading)
+  const hasErrorIngredients = useSelector(state => state.ingredientsReducer.hasError)
+  const isLoadingOrder = useSelector(state => state.orderReducer.isLoading)
+  const hasErrorOrder = useSelector(state => state.orderReducer.hasError)
+  const isIngredientDetailsOpened = useSelector(store => store.itemReducer.isOpened)
+  const isOrderDetailsOpened = useSelector(store => store.orderReducer.isOpened)
 
     return (
       <>
         <AppHeader />        
-        {!isLoading && !hasError && data.length && <AppMain />} 
-        {isIngredientDetailsOpened && <Modal title="Детали ингредиента"><IngredientDetails /></Modal>}
-        {isOrderDetailsOpened && <Modal title=""><OrderDetails /></Modal>}
+        {!isLoadingIngredients && !hasErrorIngredients && data.length && <AppMain />} 
+        {!isLoadingIngredients && !hasErrorIngredients && isIngredientDetailsOpened && <Modal title="Детали ингредиента"><IngredientDetails /></Modal>}
+        {!isLoadingOrder && !hasErrorOrder && isOrderDetailsOpened && <Modal title=""><OrderDetails /></Modal>}
       </>
     );
   }
