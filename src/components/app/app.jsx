@@ -7,6 +7,8 @@ import OrderDetails from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIngredientsThunk } from '../../services/midleware/ingredients-thunk';
 import { Preloader } from '../preloader/preloader';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage } from '../../pages';
 
 function App() {
 
@@ -21,18 +23,36 @@ function App() {
   const {loading: isLoadingOrder, error: hasErrorOrder, open: isOrderDetailsOpened } = useSelector(state => state.orderReducer)
 
     return (
-      <>
+      <Router>
         <AppHeader />
         {isLoadingIngredients || isLoadingOrder 
         ? <Preloader /> 
         :
-        <>
-        {!hasErrorIngredients && ingredients.length && <AppMain />} 
-        {!hasErrorIngredients && isIngredientDetailsOpened && <Modal title="Детали ингредиента"><IngredientDetails /></Modal>}
-        {!hasErrorOrder && isOrderDetailsOpened && <Modal title=""><OrderDetails /></Modal>}
-        </>
+        
+          <Switch>
+            <Route path="/" exact>
+              {!hasErrorIngredients && ingredients.length && <AppMain />} 
+              {!hasErrorIngredients && isIngredientDetailsOpened && <Modal title="Детали ингредиента"><IngredientDetails /></Modal>}
+              {!hasErrorOrder && isOrderDetailsOpened && <Modal title=""><OrderDetails /></Modal>}
+            </Route>
+            <Route path="/profile">
+              <ProfilePage />
+            </Route>
+            <Route path="/login">
+              <LoginPage />
+            </Route>
+            <Route path="/register">
+              <RegisterPage />
+            </Route>
+            <Route path="/forgot-password">
+              <ForgotPasswordPage />
+            </Route>
+            <Route path="/reset-password">
+              <ResetPasswordPage />
+            </Route>
+          </Switch>    
         }
-      </>
+      </Router>
     );
   }
 
