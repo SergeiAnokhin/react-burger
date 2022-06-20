@@ -6,6 +6,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIngredientsThunk } from '../../services/midleware/ingredients-thunk';
+import { Preloader } from '../preloader/preloader';
 
 function App() {
 
@@ -21,10 +22,16 @@ function App() {
 
     return (
       <>
-        <AppHeader />        
-        {!isLoadingIngredients && !hasErrorIngredients && ingredients.length && <AppMain />} 
-        {!isLoadingIngredients && !hasErrorIngredients && isIngredientDetailsOpened && <Modal title="Детали ингредиента"><IngredientDetails /></Modal>}
-        {!isLoadingOrder && !hasErrorOrder && isOrderDetailsOpened && <Modal title=""><OrderDetails /></Modal>}
+        <AppHeader />
+        {isLoadingIngredients || isLoadingOrder 
+        ? <Preloader /> 
+        :
+        <>
+        {!hasErrorIngredients && ingredients.length && <AppMain />} 
+        {!hasErrorIngredients && isIngredientDetailsOpened && <Modal title="Детали ингредиента"><IngredientDetails /></Modal>}
+        {!hasErrorOrder && isOrderDetailsOpened && <Modal title=""><OrderDetails /></Modal>}
+        </>
+        }
       </>
     );
   }
