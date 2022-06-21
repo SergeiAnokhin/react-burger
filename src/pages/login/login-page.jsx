@@ -1,17 +1,13 @@
 import { useRef, useState } from 'react';
 import styles from './login-page.module.css';
-import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 
 export function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const inputEmailRef = useRef(null)
-  const inputPasswordRef = useRef(null)
-  const onIconClick = () => {
-    setTimeout(() => inputPasswordRef.current.focus(), 0)
-    console.log(inputPasswordRef.current)
-  }
+
   const onButtonClick = (e) => {
     e.preventDefault()
   }
@@ -20,7 +16,7 @@ export function LoginPage() {
       <h1 className={styles.title}>Вход</h1>
       <form className={styles.form}>
         <Input
-          type={'text'}
+          type={'email'}
           placeholder={'E-mail'}
           onChange={e => setEmail(e.target.value)}
           icon={''}
@@ -28,22 +24,14 @@ export function LoginPage() {
           name={'email'}
           error={false}
           ref={inputEmailRef}
-          onIconClick={onIconClick}
+          onIconClick={'undefined'}
           errorText={'Ошибка'}
           size={'default'}
         />
-        <Input
-          type={'text'}
-          placeholder={'Пароль'}
+        <PasswordInput 
           onChange={e => setPassword(e.target.value)}
-          icon={'ShowIcon'}
           value={password}
           name={'password'}
-          error={false}
-          ref={inputPasswordRef}
-          onIconClick={onIconClick}
-          errorText={'Ошибка'}
-          size={'default'}
         />
         <Button type="primary" size="medium" onClick={onButtonClick}>
           Войти

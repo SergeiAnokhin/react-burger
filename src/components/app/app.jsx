@@ -35,19 +35,27 @@ function App() {
               {!hasErrorIngredients && isIngredientDetailsOpened && <Modal title="Детали ингредиента"><IngredientDetails /></Modal>}
               {!hasErrorOrder && isOrderDetailsOpened && <Modal title=""><OrderDetails /></Modal>}
             </Route>
-            <Route path="/profile">
+            <Route path="/profile" exact>
               <ProfilePage />
             </Route>
-            <Route path="/login">
+            <Route path="/profile/orders" exact>
+              <ProfilePage />
+              Orders
+            </Route>
+            <Route path="/profile/exit" exact>
+              <ProfilePage />
+              Exit
+            </Route>
+            <Route path="/login" exact>
               <LoginPage />
             </Route>
-            <Route path="/register">
+            <Route path="/register" exact>
               <RegisterPage />
             </Route>
-            <Route path="/forgot-password">
+            <Route path="/forgot-password" exact>
               <ForgotPasswordPage />
             </Route>
-            <Route path="/reset-password">
+            <Route path="/reset-password" exact>
               <ResetPasswordPage />
             </Route>
           </Switch>    
