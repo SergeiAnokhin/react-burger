@@ -8,9 +8,6 @@
   }
 
 .wrapper {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
     animation: visible .3s linear;
     display: flex;
     justify-content: center;

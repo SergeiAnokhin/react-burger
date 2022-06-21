@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Profile() {
   return (
-    <Link className={styles.link} to="/profile">
+    <Link className={styles.link} to="/login">
             <ProfileIcon type="secondary" />
             <p className="text text_type_main-default text_color_inactive pl-2">Личный кабинет</p>
     </Link>

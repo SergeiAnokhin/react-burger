@@ -8,10 +8,60 @@
   }
 
 .wrapper {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
     animation: visible .3s linear;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding-top: 180px;
+}
+
+.title {
+    font-family: 'Jet Brains Mono';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    color: #F2F2F3;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.form div div {
+    width: 480px;
+    margin-top: 24px;
+}
+
+.form button {
+    margin-top: 24px;
+}
+
+.form div div div {
+    margin-top: 0;
+    width: 24px;
+}
+
+.text {
+    font-family: 'Jet Brains Mono';
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #8585AD;
+}
+
+.link {
+    margin-left: 8px;
+    color: #4C4CFF;
+    text-decoration: none;
 }
