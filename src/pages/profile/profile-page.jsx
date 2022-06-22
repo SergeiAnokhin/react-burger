@@ -1,5 +1,5 @@
 import styles from './profile-page.module.css';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { EmailInput, Input, EditIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -17,36 +17,36 @@ export function ProfilePage() {
   const inputEmailRef = useRef(null)
   const inputPasswordRef = useRef(null)
 
-  const onChangeName = e => {
-    setName(e.target.value)
-  }
-
-  const onChangeEmail = e => {
-    setEmail(e.target.value)
-  }
-
-  const onChangePassword = e => {
-    setPassword(e.target.value)
-  }
-
   const onNameEditClick = () => {
-    setEditName(!editName)
-    setTimeout(() => inputNameRef.current.focus(), 0)
+      setEditName(false)
+      setTimeout(() => inputNameRef.current.focus(), 0)
   }
 
   const onEmailEditClick = () => {
-    setEditEmail(!editEmail)
+    setEditEmail(false)
     setTimeout(() => inputEmailRef.current.focus(), 0)
   }
 
   const onPasswordEditClick = () => {
-    setEditPassword(!editPassword)
+    setEditPassword(false)
     setTimeout(() => inputPasswordRef.current.focus(), 0)
   }
 
   const checkActive = (to) => {
     return to ? to.isExact : false;
   };
+
+  useEffect(() => {
+      inputNameRef.current.addEventListener('blur', () => {
+        setEditName(true)
+      })
+      inputEmailRef.current.addEventListener('blur', () => {
+        setEditEmail(true)
+      })
+      inputPasswordRef.current.addEventListener('blur', () => {
+        setEditPassword(true)
+      })
+  }, [])
 
   return (
     <Router>
