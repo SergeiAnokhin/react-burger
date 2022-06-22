@@ -109,11 +109,3 @@
 .activeLink {
     color: #F2F2F3;
 }
-
-.historyTitle {
-    animation: visible .3s linear;
-}
-
-.exitTitle {
-    animation: visible .3s linear;
-}

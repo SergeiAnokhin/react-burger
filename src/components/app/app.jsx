@@ -27,24 +27,21 @@ function App() {
         <AppHeader />
         {isLoadingIngredients || isLoadingOrder 
         ? <Preloader /> 
-        :
-        
+        :        
           <Switch>
-            <Route path="/" exact>
+            <Route exact path="/">
               {!hasErrorIngredients && ingredients.length && <AppMain />} 
               {!hasErrorIngredients && isIngredientDetailsOpened && <Modal title="Детали ингредиента"><IngredientDetails /></Modal>}
               {!hasErrorOrder && isOrderDetailsOpened && <Modal title=""><OrderDetails /></Modal>}
             </Route>
-            <Route path="/profile" exact>
+            <Route exact path="/profile">
               <ProfilePage />
             </Route>
-            <Route path="/profile/orders" exact>
+            <Route exact path="/profile/orders">
               <ProfilePage />
-              Orders
             </Route>
-            <Route path="/profile/exit" exact>
+            <Route exact path="/profile/exit">
               <ProfilePage />
-              Exit
             </Route>
             <Route path="/login" exact>
               <LoginPage />
