@@ -40,13 +40,19 @@ export function ProfilePage() {
       inputNameRef.current.addEventListener('blur', () => {
         setEditName(true)
       })
-      inputEmailRef.current.addEventListener('blur', () => {
-        setEditEmail(true)
-      })
-      inputPasswordRef.current.addEventListener('blur', () => {
-        setEditPassword(true)
-      })
-  }, [])
+  }, [editName])
+
+  useEffect(() => {
+    inputEmailRef.current.addEventListener('blur', () => {
+      setEditEmail(true)
+    })
+}, [editEmail])
+
+useEffect(() => {
+  inputPasswordRef.current.addEventListener('blur', () => {
+    setEditPassword(true)
+  })
+}, [editPassword])
 
   return (
     <Router>
