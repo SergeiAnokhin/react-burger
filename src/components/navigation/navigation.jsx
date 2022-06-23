@@ -16,9 +16,9 @@ const location = useLocation()
                 </NavLink>
             </li>
             <li className={styles.item}>
-                <NavLink className={styles.link} to="/profile/orders">
-                    <ListIcon type={location.pathname === '/profile/orders' ? 'primary' : 'secondary'} />
-                    <p className={`text text_type_main-default pl-2 ${location.pathname === '/profile/orders' ? '' : 'text_color_inactive'}`}>Лента заказов</p>
+                <NavLink className={styles.link} to="/feed">
+                    <ListIcon type={location.pathname === '/feed' ? 'primary' : 'secondary'} />
+                    <p className={`text text_type_main-default pl-2 ${location.pathname === '/feed' ? '' : 'text_color_inactive'}`}>Лента заказов</p>
                 </NavLink>
             </li>
         </ul>

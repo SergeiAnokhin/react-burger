@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setIngredientsThunk } from '../../services/midleware/ingredients-thunk';
 import { Preloader } from '../preloader/preloader';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage } from '../../pages';
+import { ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage, FeedPage } from '../../pages';
 
 function App() {
 
@@ -33,6 +33,9 @@ function App() {
               {!hasErrorIngredients && ingredients.length && <AppMain />} 
               {!hasErrorIngredients && isIngredientDetailsOpened && <Modal title="Детали ингредиента"><IngredientDetails /></Modal>}
               {!hasErrorOrder && isOrderDetailsOpened && <Modal title=""><OrderDetails /></Modal>}
+            </Route>
+            <Route exact path="/feed">
+              <FeedPage />
             </Route>
             <Route exact path="/profile">
               <ProfilePage />

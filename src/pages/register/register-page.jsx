@@ -1,9 +1,15 @@
 import styles from './register-page.module.css';
 import { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Input, Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
+import { registrationUser } from '../../services/actions/user-actions';
+import { registrationUserThunk } from '../../services/midleware/user-thunk';
 
 export function RegisterPage() {
+
+  const dispatch = useDispatch()
+
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -13,6 +19,14 @@ export function RegisterPage() {
 
   const onButtonClick = (e) => {
     e.preventDefault()
+    // console.log(name)
+    // console.log(email)
+    // console.log(password)
+    dispatch(registrationUserThunk({
+      "email": email, 
+      "password": password, 
+      "name": name 
+  } ))
   }
 
   return (

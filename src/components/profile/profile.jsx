@@ -7,10 +7,10 @@ function Profile() {
   const location = useLocation();
 
   return (
-    <NavLink className={styles.link} to="/login">
-            <ProfileIcon type={location.pathname === '/login' ? 'primary' : 'secondary'} />
-            <p className={`text text_type_main-default pl-2 ${location.pathname === '/login' ? '' : 'text_color_inactive'}`}>Личный кабинет</p>
-    </NavLink>
+      <NavLink className={styles.link} to="/profile">
+              <ProfileIcon type={location.pathname === '/profile' ? 'primary' : 'secondary'} />
+              <p className={`text text_type_main-default pl-2 ${location.pathname === '/profile' ? '' : 'text_color_inactive'}`}>Личный кабинет</p>
+      </NavLink>
   );
 }
 

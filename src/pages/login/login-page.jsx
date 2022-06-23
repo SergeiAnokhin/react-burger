@@ -2,14 +2,23 @@ import { useRef, useState } from 'react';
 import styles from './login-page.module.css';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUserThunk } from '../../services/midleware/user-thunk';
 
 export function LoginPage() {
+
+  const dispatch = useDispatch()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const inputEmailRef = useRef(null)
 
   const onButtonClick = (e) => {
     e.preventDefault()
+    dispatch(loginUserThunk({
+      email: email,
+      password: password
+    }))
   }
   return (
     <div className={styles.wrapper}>
