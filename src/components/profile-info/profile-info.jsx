@@ -4,9 +4,9 @@ import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export function ProfileInfo() {
 
-  const [name, setName] = useState('Сергей')
-  const [email, setEmail] = useState('user@mail.ru')
-  const [password, setPassword] = useState('123456')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const [editName, setEditName] = useState(true)
   const [editEmail, setEditEmail] = useState(true)

@@ -1,8 +1,17 @@
 import styles from './profile-page.module.css';
-import { NavLink, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { NavLink, BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { ProfileInfo } from '../../components/profile-info/profile-info';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserInfoThunk } from '../../services/midleware/user-thunk';
+import { useEffect } from 'react';
 
 export function ProfilePage() {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUserInfoThunk())
+  }, [])
 
   const checkActive = (to) => {
     return to ? to.isExact : false; 

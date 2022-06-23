@@ -3,8 +3,6 @@ import { REGISTRATION_USER, LOGIN_USER, LOGOUT_USER, REFRESH_TOKEN_USER, LOADING
 const initialState = {
     name: '',
     email: '',
-    accessToken: '',
-    refreshToken: '',
     loading: false,
     error: false
 }
@@ -12,9 +10,9 @@ const initialState = {
 export const userReducer = (state = initialState, action) => {
     switch(action.type) {
       case REGISTRATION_USER:
-        return {...state, name: action.payload.user.name, email: action.payload.user.email, accessToken: action.payload.accessToken, refreshToken: action.payload.refreshToken }
+        return {...state, name: action.payload.user.name, email: action.payload.user.email}
       case LOGIN_USER:
-        return {...state, name: action.payload.user.name, email: action.payload.user.email, accessToken: action.payload.accessToken, refreshToken: action.payload.refreshToken }
+        return {...state, name: action.payload.user.name, email: action.payload.user.email}
       case LOGOUT_USER:
         return state
       case REFRESH_TOKEN_USER:

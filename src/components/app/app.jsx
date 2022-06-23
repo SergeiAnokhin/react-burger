@@ -7,7 +7,7 @@ import OrderDetails from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIngredientsThunk } from '../../services/midleware/ingredients-thunk';
 import { Preloader } from '../preloader/preloader';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage, FeedPage } from '../../pages';
 
 function App() {
@@ -17,6 +17,8 @@ function App() {
   useEffect(() => {
       dispatch(setIngredientsThunk())
   }, [])
+
+  const user = useSelector(store => store.userReducer)
 
   const {ingredients, loading: isLoadingIngredients , error: hasErrorIngredients } = useSelector(state => state.ingredientsReducer)
   const isIngredientDetailsOpened = useSelector(store => store.itemReducer.open)
@@ -38,7 +40,7 @@ function App() {
               <FeedPage />
             </Route>
             <Route exact path="/profile">
-              <ProfilePage />
+            {!user.name ? <Redirect to="/login" /> : <ProfilePage />}
             </Route>
             <Route exact path="/profile/orders">
               <ProfilePage />
@@ -47,7 +49,7 @@ function App() {
               <ProfilePage />
             </Route>
             <Route path="/login" exact>
-              <LoginPage />
+            {user.name ? <Redirect to="/" /> : <LoginPage />}
             </Route>
             <Route path="/register" exact>
               <RegisterPage />
