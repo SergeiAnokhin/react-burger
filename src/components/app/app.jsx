@@ -40,7 +40,7 @@ function App() {
               <FeedPage />
             </Route>
             <Route exact path="/profile">
-            {!user.name ? <Redirect to="/login" /> : <ProfilePage />}
+            {!sessionStorage.getItem('token') ? <Redirect to="/login" /> : <ProfilePage />}
             </Route>
             <Route exact path="/profile/orders">
               <ProfilePage />
@@ -49,7 +49,7 @@ function App() {
               <ProfilePage />
             </Route>
             <Route path="/login" exact>
-            {user.name ? <Redirect to="/" /> : <LoginPage />}
+            {sessionStorage.getItem('token') ? <Redirect to="/" /> : <LoginPage />}
             </Route>
             <Route path="/register" exact>
               <RegisterPage />
