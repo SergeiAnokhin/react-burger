@@ -48,6 +48,24 @@
     opacity: .8;
 }
 
+.menuBtn {
+    padding: 0;
+    font-family: 'Jet Brains Mono';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    background-color: transparent;
+    color: #8585AD;
+    border: none;
+    cursor: pointer;
+    transition: opacity .2s linear;
+}
+
+.menuBtn:hover {
+    opacity: .8;
+}
+
 .menuText {
     font-family: 'Jet Brains Mono';
     font-style: normal;

@@ -6,6 +6,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIngredientsThunk } from '../../services/midleware/ingredients-thunk';
+import { getUserInfoThunk, refreshTokenThunk } from '../../services/midleware/user-thunk';
 import { Preloader } from '../preloader/preloader';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage, FeedPage } from '../../pages';
@@ -13,21 +14,28 @@ import { ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPassword
 function App() {
 
   const dispatch = useDispatch()
-
-  useEffect(() => {
-      dispatch(setIngredientsThunk())
-  }, [])
-
   const user = useSelector(store => store.userReducer)
 
   const {ingredients, loading: isLoadingIngredients , error: hasErrorIngredients } = useSelector(state => state.ingredientsReducer)
   const isIngredientDetailsOpened = useSelector(store => store.itemReducer.open)
   const {loading: isLoadingOrder, error: hasErrorOrder, open: isOrderDetailsOpened } = useSelector(state => state.orderReducer)
 
+  useEffect(() => {
+    dispatch(getUserInfoThunk())
+    dispatch(setIngredientsThunk())
+}, [])
+
+useEffect(() => {
+  if (user.error) {
+    console.log('надо обновить токен')
+    dispatch(refreshTokenThunk())
+  }
+}, [user.error])
+
     return (
       <Router>
         <AppHeader />
-        {isLoadingIngredients || isLoadingOrder 
+        {isLoadingIngredients || isLoadingOrder || user.loading
         ? <Preloader /> 
         :        
           <Switch>

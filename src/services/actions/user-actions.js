@@ -1,4 +1,4 @@
-import { REGISTRATION_USER, LOGIN_USER, LOGOUT_USER, REFRESH_TOKEN_USER, LOADING_USER, ERROR_USER } from "../actions/types-actions";
+import { REGISTRATION_USER, LOGIN_USER, LOGOUT_USER, REFRESH_TOKEN_USER, LOADING_USER, ERROR_USER, GET_USER_INFO, UPDATE_USER_INFO } from "../actions/types-actions";
 
 export const registrationUser = (value) => {
     return {type: REGISTRATION_USER, payload: value}
@@ -8,8 +8,16 @@ export const loginUser = (value) => {
     return {type: LOGIN_USER, payload: value}
 }
 
-export const logoutUser = (value) => {
-    return {type: LOGOUT_USER, payload: value}
+export const getUserInfo = (value) => {
+    return {type: GET_USER_INFO, payload: value}
+}
+
+export const updateUserInfo = (value) => {
+    return {type: UPDATE_USER_INFO, payload: value}
+}
+
+export const logoutUser = () => {
+    return {type: LOGOUT_USER}
 }
 
 export const refreshTokenUser = (value) => {
