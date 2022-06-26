@@ -7,16 +7,24 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { openIngredientModal } from '../../services/actions/item-actions';
 import { openOrderModal } from '../../services/actions/order-actions';
+import { useHistory } from 'react-router-dom';
 
 const modalsContainer = document.querySelector('#modals');
 
 const Modal = (props) => {
 
   const dispatch = useDispatch()
+  const history = useHistory()
+
+  const closeModal = () => {
+    dispatch(openIngredientModal(false))
+    dispatch(openOrderModal(false))
+    history.replace('/')
+  }
 
   React.useEffect(() => {
     const onEscKeydown = (event) => {
-      event.key === "Escape" && dispatch(openIngredientModal(false)) && dispatch(openOrderModal(false));
+      event.key === "Escape" && closeModal();
     };
     document.addEventListener('keydown', onEscKeydown);
 
@@ -30,11 +38,11 @@ const Modal = (props) => {
       <div className={`${styles.modal} p-10`}>
         <h3 className={styles.title}>{props.title}</h3>
           {props.children} 
-        <div className={styles.closeIcon} onClick={() => {dispatch(openIngredientModal(false)); dispatch(openOrderModal(false));}}>
+        <div className={styles.closeIcon} onClick={closeModal}>
           <CloseIcon type="primary" />
         </div>
       </div>
-      <ModalOverlay onClick={() => {dispatch(openIngredientModal(false)); dispatch(openOrderModal(false));}} /> 
+      <ModalOverlay /> 
     </>,
     modalsContainer
   );

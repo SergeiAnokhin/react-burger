@@ -1,11 +1,14 @@
 import styles from './profile-info.module.css';
 import { useEffect, useRef, useState } from 'react';
-import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateUserInfoThunk } from '../../services/midleware/user-thunk';
+import { Preloader } from '../preloader/preloader';
 
 
 export function ProfileInfo() {
 
+  const dispatch = useDispatch()
   const user = useSelector(store => store.userReducer)
 
   const [name, setName] = useState(user.name)
@@ -78,6 +81,22 @@ export function ProfileInfo() {
     })
     }, [editPassword])
 
+    const handlerReset = (e) => {
+      e.preventDefault()
+      setName(user.name)
+      setEmail(user.email)
+      setPassword('')
+    }
+
+    const handlerSave = (e) => {
+      e.preventDefault()
+      dispatch(updateUserInfoThunk({
+        "email": email, 
+        "password": password, 
+        "name": name 
+    }))
+    }
+
   return (
     <form className={styles.form}>
         <Input
@@ -122,6 +141,13 @@ export function ProfileInfo() {
             size={'default'}
             disabled={editPassword}
         />
+        {name !== user.name || email !== user.email || password !== user.password 
+        ? 
+        <div className={styles.btns}>
+          <Button type="secondary" size="medium" className={styles.btn} onClick={handlerReset}>Отмена</Button>
+          <Button type="primary" size="medium" className={styles.btn} onClick={handlerSave}>Сохранить</Button>
+        </div>
+        : ''}
     </form>
   );
 } 

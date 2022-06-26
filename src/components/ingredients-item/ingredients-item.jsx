@@ -5,18 +5,18 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { openIngredientModal, ingredientId } from '../../services/actions/item-actions';
 import { useDrag } from "react-dnd";
+import { Link, useLocation } from 'react-router-dom';
 
 function IngredientsItem(props) {
     const [count, setCount] = React.useState(0)
     const allIngredientsId = useSelector(store => store.constructorReducer.allIngredientsId)
     const dispatch = useDispatch()
-    
+    const location = useLocation()
+    const id = props.id;
+
     const handleClickItem = () => {
-        dispatch(openIngredientModal(true))
         dispatch(ingredientId(props.id))
     }
-
-    const id = props.id;
 
     const [, dragRef] = useDrag({
         type: "ingredient-item",
@@ -28,13 +28,18 @@ function IngredientsItem(props) {
         setCount(arrLength)
     }, [allIngredientsId])
 
+    const path = {
+        pathname: `/ingredients/${id}`,
+        state: {background: location}
+      }
+
     return (
-        <div className={`${styles.item} p-4 mb-8`} ref={dragRef} onClick={handleClickItem}>
+        <Link to={path} className={`${styles.item} p-4 mb-8`} ref={dragRef} onClick={handleClickItem}>
             <img src={props.image} alt="" />
             <p className={`${styles.price} text text_type_main-default mb-2 mt-2`}><span className="mr-2">{props.price}</span> <CurrencyIcon type="primary" /></p>
             <p className="text text_type_main-default">{props.name}</p>
             {count > 0 && <Counter count={count} size="default" />}
-        </div>
+        </Link>
     );
 }
 

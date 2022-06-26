@@ -5,5 +5,7 @@ import { RegisterPage } from "./register/register-page";
 import { ResetPasswordPage } from "./reset-password/reset-password-page";
 import { OrdersHistoryPage } from "./orders-history/orders-history";
 import { FeedPage } from "./feed/feed-page";
+import { MainPage } from "./main/main-page";
+import { IngredientPage } from "./ingredients/ingredients-page";
 
-export { ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage, OrdersHistoryPage, FeedPage };
+export { MainPage, ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage, OrdersHistoryPage, FeedPage, IngredientPage };

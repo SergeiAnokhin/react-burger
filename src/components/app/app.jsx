@@ -1,63 +1,52 @@
 import { useEffect } from 'react';
 import AppHeader from '../app-header/app-header';
-import AppMain from '../app-main/app-main';
-import Modal from '../modal/modal';
-import IngredientDetails from '../ingredient-details/ingredient-details';
-import OrderDetails from '../order-details/order-details';
+import IngredientDetails from '../ingredient-details/ingredient-details'
 import { useDispatch, useSelector } from 'react-redux';
 import { setIngredientsThunk } from '../../services/midleware/ingredients-thunk';
-import { getUserInfoThunk, refreshTokenThunk } from '../../services/midleware/user-thunk';
+import { getUserInfoThunk } from '../../services/midleware/user-thunk';
+import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { MainPage, ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage, FeedPage, IngredientPage } from '../../pages';
+import { ProtectedRoute } from '../ProtectedRoute/protected-route';
+import Modal from '../modal/modal';
 import { Preloader } from '../preloader/preloader';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage, FeedPage } from '../../pages';
 
 function App() {
 
   const dispatch = useDispatch()
   const user = useSelector(store => store.userReducer)
-
-  const {ingredients, loading: isLoadingIngredients , error: hasErrorIngredients } = useSelector(state => state.ingredientsReducer)
-  const isIngredientDetailsOpened = useSelector(store => store.itemReducer.open)
-  const {loading: isLoadingOrder, error: hasErrorOrder, open: isOrderDetailsOpened } = useSelector(state => state.orderReducer)
+  const location = useLocation()
+  const background = location.state?.background;
 
   useEffect(() => {
-    dispatch(getUserInfoThunk())
-    dispatch(setIngredientsThunk())
-}, [])
+    if (localStorage.getItem('token') && sessionStorage.getItem('token')) {
+      dispatch(getUserInfoThunk())
+    }
+  }, [])
 
-useEffect(() => {
-  if (user.error) {
-    console.log('надо обновить токен')
-    dispatch(refreshTokenThunk())
-  }
-}, [user.error])
+  useEffect(() => {
+    dispatch(setIngredientsThunk())
+  }, [])
 
     return (
-      <Router>
-        <AppHeader />
-        {isLoadingIngredients || isLoadingOrder || user.loading
-        ? <Preloader /> 
-        :        
-          <Switch>
+      <>
+        <AppHeader />  
+          <Switch location={background || location}>
             <Route exact path="/">
-              {!hasErrorIngredients && ingredients.length && <AppMain />} 
-              {!hasErrorIngredients && isIngredientDetailsOpened && <Modal title="Детали ингредиента"><IngredientDetails /></Modal>}
-              {!hasErrorOrder && isOrderDetailsOpened && <Modal title=""><OrderDetails /></Modal>}
+              <MainPage />
             </Route>
             <Route exact path="/feed">
               <FeedPage />
             </Route>
-            <Route exact path="/profile">
-            {!sessionStorage.getItem('token') ? <Redirect to="/login" /> : <ProfilePage />}
-            </Route>
-            <Route exact path="/profile/orders">
+            <ProtectedRoute exact path="/profile">
               <ProfilePage />
-            </Route>
-            <Route exact path="/profile/exit">
+            </ProtectedRoute>
+            <ProtectedRoute exact path="/profile/orders">
               <ProfilePage />
-            </Route>
+            </ProtectedRoute>
             <Route path="/login" exact>
-            {sessionStorage.getItem('token') ? <Redirect to="/" /> : <LoginPage />}
+              {sessionStorage.getItem('token') && localStorage.getItem('token') && !user.loading ? <Redirect to="/" /> : 
+              user.loading ? <Preloader/> :
+              <LoginPage />}
             </Route>
             <Route path="/register" exact>
               <RegisterPage />
@@ -68,10 +57,21 @@ useEffect(() => {
             <Route path="/reset-password" exact>
               <ResetPasswordPage />
             </Route>
-          </Switch>    
-        }
-      </Router>
-    );
+            <Route path='/ingredients/:id'>
+              <IngredientPage />
+            </Route>
+          </Switch>
+
+          {background && (
+            <Route
+              path="/ingredients/:id"
+              children={
+                <Modal title="Детали ингредиента"><IngredientDetails /></Modal>
+              }
+            />
+          )}
+        </>
+ );
   }
 
 export default App;

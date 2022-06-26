@@ -1,14 +1,15 @@
 import { useRef, useState } from 'react';
 import styles from './login-page.module.css';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUserThunk } from '../../services/midleware/user-thunk';
 
 export function LoginPage() {
 
   const dispatch = useDispatch()
-
+  const location = useLocation()
+  const history = useHistory()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const inputEmailRef = useRef(null)
@@ -19,6 +20,8 @@ export function LoginPage() {
       email: email,
       password: password
     }))
+    console.log(location)
+    history.replace('/')
   }
   return (
     <div className={styles.wrapper}>

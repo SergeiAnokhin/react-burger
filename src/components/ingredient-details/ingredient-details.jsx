@@ -1,13 +1,17 @@
-import React from 'react';
 import styles from './ingredient-details.module.css';
 import { useSelector } from 'react-redux';
+import { Preloader } from '../preloader/preloader';
 
 function IngredientDetails() {
 
     const itemId = useSelector(store => store.itemReducer.itemId)
+    const { ingredients } = useSelector(store => store.ingredientsReducer)
     const ingredient = useSelector(store => store.ingredientsReducer.ingredients).find((elem) => elem._id === itemId)
     
     return (
+                !ingredients.length 
+                ? <Preloader/> 
+                : 
                 <>
                     <img src={ingredient.image_large} alt="" />
                     <h4 className={`${styles.title} mb-8`}>{ingredient.name}</h4>

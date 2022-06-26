@@ -1,5 +1,5 @@
-import { registrationUser, loginUser, loadingUser, errorUser, logoutUser, getUserInfo, refreshTokenUser } from "../actions/user-actions";
-import { URL_LOGIN, URL_REGISTRATION, URL_USER, URL_LOGOUT, URL_TOKEN } from "./api";
+import { registrationUser, loginUser, loadingUser, errorUser, logoutUser, getUserInfo, refreshTokenUser, updateUserInfo } from "../actions/user-actions";
+import { URL_LOGIN, URL_REGISTRATION, URL_USER, URL_LOGOUT, URL_TOKEN, URL_UPDATE_USER } from "./api";
 
 export const registrationUserThunk = ({email, password, name}) => {   
     return (dispatch) => {
@@ -21,8 +21,45 @@ export const registrationUserThunk = ({email, password, name}) => {
         .then(res => {if (res.ok) {return res.json()}
         return Promise.reject(`Ошибка: ${res.status}`);})
         .then((res) => {
+            console.log('Registration================')
             console.log(res)
+            console.log('Registration================')
             dispatch(registrationUser(res))
+            dispatch(loadingUser(false))
+        })
+        .catch(e => {
+            dispatch(errorUser(true))
+            dispatch(loadingUser(false))
+            console.log('Ошибка получения данных с сервера', e.message);
+          });
+    }
+}
+
+export const updateUserInfoThunk = ({email, password, name}) => {   
+    return (dispatch) => {
+        dispatch(loadingUser(true))
+        return fetch(URL_USER, {
+            method: 'PATCH', 
+            body: JSON.stringify({
+                "email": email, 
+                "password": password, 
+                "name": name 
+            }),
+            headers: {
+                'Access-Control-Allow-Origin':  'http://127.0.0.1:3000',
+                'Access-Control-Allow-Methods': 'POST',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                'Content-type': 'application/json; charset=UTF-8',
+                'Authorization': sessionStorage.getItem('token')
+            },
+        })
+        .then(res => {if (res.ok) {return res.json()}
+        return Promise.reject(`Ошибка: ${res.status}`);})
+        .then((res) => {
+            console.log('UpdateUser================')
+            console.log(res)
+            console.log('UpdateUser================')
+            dispatch(updateUserInfo(res))
             dispatch(loadingUser(false))
         })
         .catch(e => {
@@ -52,11 +89,14 @@ export const loginUserThunk = ({email, password}) => {
         .then(res => {if (res.ok) {return res.json()}
         return Promise.reject(`Ошибка: ${res.status}`);})
         .then((res) => {
+            console.log('Login================')
             console.log(res)
+            console.log('Login================')
             localStorage.setItem('token', res.refreshToken)
             sessionStorage.setItem('token', res.accessToken)
             dispatch(loginUser(res))
             dispatch(loadingUser(false))
+            dispatch(errorUser(false))
         })
         .catch(e => {
             dispatch(errorUser(true))
@@ -82,9 +122,12 @@ export const getUserInfoThunk = () => {
         .then(res => {if (res.ok) {return res.json()}
         return Promise.reject(`Ошибка: ${res.status}`);})
         .then((res) => {
+            console.log('UserInfo================')
             console.log(res)
+            console.log('UserInfo================')
             dispatch(getUserInfo(res))
             dispatch(loadingUser(false))
+            
             // localStorage.setItem('token', res.refreshToken)
             // sessionStorage.setItem('token', res.accessToken)
             // dispatch(loginUser(res))
@@ -93,6 +136,7 @@ export const getUserInfoThunk = () => {
         .catch(e => {
             dispatch(errorUser(true))
             dispatch(loadingUser(false))
+            console.log('ошибка полчения данных пользователя')
             console.log('Ошибка получения данных с сервера', e.message);
           });
     }
@@ -117,7 +161,10 @@ export const logoutUserThunk = () => {
         .then(res => {if (res.ok) {return res.json()}
         return Promise.reject(`Ошибка: ${res.status}`);})
         .then((res) => {
+            console.log('Logout================')
             console.log(res)
+            console.log('Logout================')
+            localStorage.removeItem('token')
             sessionStorage.removeItem('token')
             dispatch(logoutUser())
             dispatch(loadingUser(false))
@@ -153,7 +200,9 @@ export const refreshTokenThunk = () => {
         .then(res => {if (res.ok) {return res.json()}
         return Promise.reject(`Ошибка: ${res.status}`);})
         .then((res) => {
+            console.log('RefreshToken================')
             console.log(res)
+            console.log('RefreshToken================')
             localStorage.setItem('token', res.refreshToken)
             sessionStorage.setItem('token', res.accessToken)
             dispatch(loadingUser(false))

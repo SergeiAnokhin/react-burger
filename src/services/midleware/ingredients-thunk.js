@@ -8,8 +8,8 @@ export const setIngredientsThunk = () => {
         .then(res => {if (res.ok) {return res.json()}
         return Promise.reject(`Ошибка: ${res.status}`);})
         .then((res) => {
-            dispatch(loadingIngredients(false))
             dispatch(setIngredients(res.data))
+            dispatch(loadingIngredients(false))
         })
         .catch(e => {
             dispatch(errorIngredients(true))

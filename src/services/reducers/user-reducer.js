@@ -16,9 +16,9 @@ export const userReducer = (state = initialState, action) => {
       case LOGIN_USER:
         return {...state, name: action.payload.user.name, email: action.payload.user.email, auth: action.payload.success}
       case GET_USER_INFO:
-      return {...state, name: action.payload.user.name, email: action.payload.user.email, auth: action.payload.success}
+        return {...state, name: action.payload.user.name, email: action.payload.user.email, auth: action.payload.success}
       case UPDATE_USER_INFO:
-      return {...state, name: action.payload.user.name, email: action.payload.user.email, auth: action.payload.success}
+        return {...state, name: action.payload.user.name, email: action.payload.user.email, auth: action.payload.success}
       case LOGOUT_USER:
         return {...state, name: '', email: '', auth: false}
       case REFRESH_TOKEN_USER:

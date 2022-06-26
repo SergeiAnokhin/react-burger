@@ -26,7 +26,7 @@ export function RegisterPage() {
       "email": email, 
       "password": password, 
       "name": name 
-  } ))
+  }))
   }
 
   return (
