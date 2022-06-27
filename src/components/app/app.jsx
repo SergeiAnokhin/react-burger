@@ -4,7 +4,7 @@ import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { setIngredientsThunk } from '../../services/midleware/ingredients-thunk';
-import { getUserInfoThunk } from '../../services/midleware/user-thunk';
+import { getUserInfoThunk, refreshTokenThunk } from '../../services/midleware/user-thunk';
 import { MainPage, ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage, FeedPage, IngredientPage } from '../../pages';
 import { ProtectedRoute } from '../ProtectedRoute/protected-route';
 import Modal from '../modal/modal';
@@ -20,6 +20,12 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem('token') && sessionStorage.getItem('token')) {
       dispatch(getUserInfoThunk());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('token')) {
+      setInterval(() => dispatch(refreshTokenThunk()), 300000);
     }
   }, []);
 

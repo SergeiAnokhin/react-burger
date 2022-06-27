@@ -12,7 +12,8 @@ export const getOrderThunk = (data) => {
         'ingredients': data
       }),
       headers: {
-        'Content-type': 'application/json; charset=UTF-8'
+        'Content-type': 'application/json; charset=UTF-8',
+        'Authorization': sessionStorage.getItem('token')
       }
     })
       .then(res => {if (res.ok) {return res.json();}

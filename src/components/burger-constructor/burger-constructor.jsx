@@ -1,7 +1,8 @@
-import { useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
+import { useHistory } from 'react-router-dom';
 import { getOrderThunk } from '../../services/midleware/order-thunk';
 import { addIngredient, addBun  } from '../../services/actions/constructor-actions';
 import ConstructorItem from '../constructor-item/constructor-item';
@@ -9,11 +10,11 @@ import styles from './burger-constructor.module.css';
 
 function BurgerConstructor() {
 
-  const ref = useRef();
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const { bun, ingredients, allIngredientsId } = useSelector(store => store.constructorReducer);
   const allIngredientsList = useSelector(store => store.ingredientsReducer.ingredients);
+  const user = useSelector(store => store.userReducer);
 
   const price = useMemo(() => {
     const bunPrice = bun.length > 0 ? bun[0].price * 2 : 0;
@@ -22,7 +23,12 @@ function BurgerConstructor() {
   }, [bun, ingredients]);  
 
   const getOrder = () => {
-    dispatch(getOrderThunk(allIngredientsId));
+    if (user.auth) {
+      dispatch(getOrderThunk(allIngredientsId));
+    }
+    if (!user.auth) {
+      history.replace('/login');
+    }
   };
 
   const [, dropTarget] = useDrop({

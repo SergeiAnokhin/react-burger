@@ -1,13 +1,15 @@
-import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useRef, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { registrationUserThunk } from '../../services/midleware/user-thunk';
 import styles from './register-page.module.css';
 
 export function RegisterPage() {
 
   const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector(store => store.userReducer);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -15,6 +17,12 @@ export function RegisterPage() {
 
   const inputNameRef = useRef(null);
   const inputEmailRef = useRef(null);
+
+  useEffect(() => {
+    if (user.auth) {
+      history.replace('/');
+    }
+  }, [user.auth, history]);
 
   const onButtonClick = (e) => {
     e.preventDefault();

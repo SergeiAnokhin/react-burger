@@ -15,7 +15,13 @@ export function MainPage() {
   return (
         
     isLoadingIngredients || isLoadingOrder || user.loading
-      ? <Preloader /> 
+      ?   
+      <>    
+        <Preloader />
+        {!hasErrorIngredients && ingredients.length && <AppMain />} 
+        {!hasErrorIngredients && isIngredientDetailsOpened && <Modal title='Детали ингредиента'><IngredientDetails /></Modal>}
+        {!hasErrorOrder && isOrderDetailsOpened && <Modal title=''><OrderDetails /></Modal>}
+      </>  
       :    
       <>    
         {!hasErrorIngredients && ingredients.length && <AppMain />} 

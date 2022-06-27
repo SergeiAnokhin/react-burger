@@ -5,7 +5,6 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import styles from './app-main.module.css';
 
 function AppMain() {
-
   return (
     <main className={`${styles.main} pl-5 pr-5`}>
       <DndProvider backend={HTML5Backend}>
@@ -13,7 +12,6 @@ function AppMain() {
         <BurgerConstructor />
       </DndProvider>
     </main>
-
   );
 }
 

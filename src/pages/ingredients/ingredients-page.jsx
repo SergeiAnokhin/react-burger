@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import IngredientDetails from '../../components/ingredient-details/ingredient-details';
@@ -10,7 +11,10 @@ export function IngredientPage() {
   const location = useLocation();
 
   const itemId = location.pathname.split('/').slice(-1)[0];
-  dispatch(ingredientId(itemId));
+  useEffect(() => {
+    dispatch(ingredientId(itemId));
+  }, []);
+  
 
   return (
     <div className={styles.wrapper}>

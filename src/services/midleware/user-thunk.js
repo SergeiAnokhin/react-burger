@@ -1,4 +1,4 @@
-import { registrationUser, loginUser, loadingUser, errorUser, logoutUser, getUserInfo, updateUserInfo, forgotUserPassword, resetUserPassword } from '../actions/user-actions';
+import { registrationUser, loginUser, loadingUser, errorUser, logoutUser, getUserInfo, updateUserInfo, forgotUserPassword, resetUserPassword, refreshTokenUser } from '../actions/user-actions';
 import { URL_LOGIN, URL_REGISTRATION, URL_USER, URL_LOGOUT, URL_TOKEN, URL_FORGOT_PASSWORD, URL_RESET_PASSWORD } from './api';
 
 export const registrationUserThunk = ({email, password, name}) => {   
@@ -192,11 +192,6 @@ export const getUserInfoThunk = () => {
         console.log('UserInfo================');
         dispatch(getUserInfo(res));
         dispatch(loadingUser(false));
-            
-        // localStorage.setItem('token', res.refreshToken)
-        // sessionStorage.setItem('token', res.accessToken)
-        // dispatch(loginUser(res))
-        // dispatch(loadingUser(false))
       })
       .catch(e => {
         dispatch(errorUser(true));
@@ -233,10 +228,6 @@ export const logoutUserThunk = () => {
         sessionStorage.removeItem('token');
         dispatch(logoutUser());
         dispatch(loadingUser(false));
-        // localStorage.setItem('token', res.refreshToken)
-        // sessionStorage.setItem('token', res.accessToken)
-        // dispatch(loginUser(res))
-        // dispatch(loadingUser(false))
       })
       .catch(e => {
         dispatch(errorUser(true));
@@ -248,7 +239,6 @@ export const logoutUserThunk = () => {
 
 export const refreshTokenThunk = () => {   
   return (dispatch) => {
-    dispatch(loadingUser(true));
     return fetch(URL_TOKEN, {
       method: 'POST', 
       body: JSON.stringify({
@@ -259,7 +249,7 @@ export const refreshTokenThunk = () => {
         'Access-Control-Allow-Methods': 'POST',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         'Content-type': 'application/json; charset=UTF-8',
-        'Authorization': sessionStorage.getItem('token')
+        'Authorization': localStorage.getItem('token')
       }
     })
       .then(res => {if (res.ok) {return res.json();}
@@ -270,14 +260,8 @@ export const refreshTokenThunk = () => {
         console.log('RefreshToken================');
         localStorage.setItem('token', res.refreshToken);
         sessionStorage.setItem('token', res.accessToken);
-        dispatch(loadingUser(false));
-        dispatch(errorUser(false));
-        // dispatch(loginUser(res))
-        // dispatch(loadingUser(false))
       })
       .catch(e => {
-        dispatch(errorUser(true));
-        dispatch(loadingUser(false));
         console.log('Ошибка получения данных с сервера', e.message);
       });
   };

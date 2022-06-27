@@ -4,8 +4,10 @@ import IngredientsItem from '../ingredients-item/ingredients-item';
 import styles from './ingredients-list.module.css';
 
 function IngredientsList(props) {
+
   const data = useSelector(store => store.ingredientsReducer.ingredients);
   const type = props.type;
+  
   return (
     <>
       <h2 className='text text_type_main-medium mb-6' id={props.id}>{props.name}</h2>

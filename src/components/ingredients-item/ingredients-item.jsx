@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
-import { openIngredientModal, ingredientId } from '../../services/actions/item-actions';
+import { ingredientId } from '../../services/actions/item-actions';
 import styles from './ingredients-item.module.css';
 
 function IngredientsItem(props) {
-  const [count, setCount] = React.useState(0);
+
+  const [count, setCount] = useState(0);
   const allIngredientsId = useSelector(store => store.constructorReducer.allIngredientsId);
   const dispatch = useDispatch();
   const location = useLocation();
