@@ -1,4 +1,4 @@
-import { registrationUser, loginUser, loadingUser, errorUser, logoutUser, getUserInfo, refreshTokenUser, updateUserInfo } from "../actions/user-actions";
+import { registrationUser, loginUser, loadingUser, errorUser, logoutUser, getUserInfo, refreshTokenUser, updateUserInfo, forgotUserPassword, resetUserPassword } from "../actions/user-actions";
 import { URL_LOGIN, URL_REGISTRATION, URL_USER, URL_LOGOUT, URL_TOKEN, URL_FORGOT_PASSWORD, URL_RESET_PASSWORD } from "./api";
 
 export const registrationUserThunk = ({email, password, name}) => {   
@@ -127,6 +127,40 @@ export const forgotUserPasswordThunk = (email) => {
             console.log('ForgotPassword================')
             console.log(res)
             console.log('ForgotPassword================')
+            dispatch(forgotUserPassword(res))
+            dispatch(loadingUser(false))
+        })
+        .catch(e => {
+            dispatch(errorUser(true))
+            dispatch(loadingUser(false))
+            console.log('Ошибка получения данных с сервера', e.message);
+          });
+    }
+}
+
+export const resetUserPasswordThunk = ({password, token}) => {   
+    return (dispatch) => {
+        dispatch(loadingUser(true))
+        return fetch(URL_RESET_PASSWORD, {
+            method: 'POST', 
+            body: JSON.stringify({
+                "password": password,
+                "token": token
+            }),
+            headers: {
+                'Access-Control-Allow-Origin':  'http://127.0.0.1:3000',
+                'Access-Control-Allow-Methods': 'POST',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+        })
+        .then(res => {if (res.ok) {return res.json()}
+        return Promise.reject(`Ошибка: ${res.status}`);})
+        .then((res) => {
+            console.log('ResetPassword================')
+            console.log(res)
+            console.log('ResetPassword================')
+            dispatch(resetUserPassword(res))
             dispatch(loadingUser(false))
         })
         .catch(e => {

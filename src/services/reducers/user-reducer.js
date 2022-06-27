@@ -1,4 +1,4 @@
-import { REGISTRATION_USER, LOGIN_USER, LOGOUT_USER, REFRESH_TOKEN_USER, LOADING_USER, ERROR_USER, GET_USER_INFO, UPDATE_USER_INFO } from "../actions/types-actions";
+import { REGISTRATION_USER, LOGIN_USER, LOGOUT_USER, REFRESH_TOKEN_USER, LOADING_USER, ERROR_USER, GET_USER_INFO, UPDATE_USER_INFO, FORGOT_USER_PASSWORD, RESET_USER_PASSWORD } from "../actions/types-actions";
 
 const initialState = {
     name: '',
@@ -6,7 +6,9 @@ const initialState = {
     password: '',
     loading: false,
     auth: false,
-    error: false
+    error: false,
+    forgotPass: false,
+    resetPass: false
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -14,7 +16,11 @@ export const userReducer = (state = initialState, action) => {
       case REGISTRATION_USER:
         return {...state, name: action.payload.user.name, email: action.payload.user.email, auth: action.payload.success}
       case LOGIN_USER:
-        return {...state, name: action.payload.user.name, email: action.payload.user.email, auth: action.payload.success}
+        return {...state, name: action.payload.user.name, email: action.payload.user.email, auth: action.payload.success, forgotPass: false, resetPass: false}
+      case FORGOT_USER_PASSWORD:
+        return {...state, forgotPass: action.payload.success}
+      case RESET_USER_PASSWORD:
+        return {...state, resetPass: action.payload.success}
       case GET_USER_INFO:
         return {...state, name: action.payload.user.name, email: action.payload.user.email, auth: action.payload.success}
       case UPDATE_USER_INFO:

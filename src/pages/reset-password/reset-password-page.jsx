@@ -1,18 +1,38 @@
 import styles from './reset-password-page.module.css';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, Redirect } from 'react-router-dom';
+import { resetUserPasswordThunk } from '../../services/midleware/user-thunk';
 
 export function ResetPasswordPage() {
-  const [name, setName] = useState('')
   const [password, setPassword] = useState('')
-  const inputNameRef = useRef(null)
+  const [token, setToken] = useState('')
+  const inputTokenRef = useRef(null)
+
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const user = useSelector(store => store.userReducer)
 
   const onButtonClick = (e) => {
     e.preventDefault()
+    dispatch(resetUserPasswordThunk({
+      password: password,
+      token: token
+    }))
   }
 
+    useEffect(() => {
+      if (user.resetPass) {
+        location.pathname = '/login'
+      }
+    }, [user.resetPass])
+
   return (
+    !user.forgotPass && !user.auth ? 
+      <Redirect to='/forgot-password'/> :
+    user.auth ? 
+      <Redirect to='/profile'/> :
     <div className={styles.wrapper}>
       <h1 className={styles.title}>Восстановление пароля</h1>
       <form className={styles.form}>
@@ -24,12 +44,12 @@ export function ResetPasswordPage() {
         <Input
           type={'text'}
           placeholder={'Введите код из письма'}
-          onChange={e => setName(e.target.value)}
+          onChange={e => setToken(e.target.value)}
           icon={''}
-          value={name}
-          name={'name'}
+          value={token}
+          name={'token'}
           error={false}
-          ref={inputNameRef}
+          ref={inputTokenRef}
           onIconClick={'undefined'}
           errorText={'Ошибка'}
           size={'default'}
