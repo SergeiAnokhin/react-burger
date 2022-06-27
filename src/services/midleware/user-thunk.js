@@ -1,5 +1,5 @@
 import { registrationUser, loginUser, loadingUser, errorUser, logoutUser, getUserInfo, refreshTokenUser, updateUserInfo } from "../actions/user-actions";
-import { URL_LOGIN, URL_REGISTRATION, URL_USER, URL_LOGOUT, URL_TOKEN, URL_UPDATE_USER } from "./api";
+import { URL_LOGIN, URL_REGISTRATION, URL_USER, URL_LOGOUT, URL_TOKEN, URL_FORGOT_PASSWORD, URL_RESET_PASSWORD } from "./api";
 
 export const registrationUserThunk = ({email, password, name}) => {   
     return (dispatch) => {
@@ -97,6 +97,37 @@ export const loginUserThunk = ({email, password}) => {
             dispatch(loginUser(res))
             dispatch(loadingUser(false))
             dispatch(errorUser(false))
+        })
+        .catch(e => {
+            dispatch(errorUser(true))
+            dispatch(loadingUser(false))
+            console.log('Ошибка получения данных с сервера', e.message);
+          });
+    }
+}
+
+export const forgotUserPasswordThunk = (email) => {   
+    return (dispatch) => {
+        dispatch(loadingUser(true))
+        return fetch(URL_FORGOT_PASSWORD, {
+            method: 'POST', 
+            body: JSON.stringify({
+                "email": email
+            }),
+            headers: {
+                'Access-Control-Allow-Origin':  'http://127.0.0.1:3000',
+                'Access-Control-Allow-Methods': 'POST',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+        })
+        .then(res => {if (res.ok) {return res.json()}
+        return Promise.reject(`Ошибка: ${res.status}`);})
+        .then((res) => {
+            console.log('ForgotPassword================')
+            console.log(res)
+            console.log('ForgotPassword================')
+            dispatch(loadingUser(false))
         })
         .catch(e => {
             dispatch(errorUser(true))

@@ -1,15 +1,23 @@
 import styles from './forgot-password-page.module.css';
 import { useRef, useState } from 'react';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { forgotUserPasswordThunk } from '../../services/midleware/user-thunk';
+
 
 export function ForgotPasswordPage() {
+
+  const dispatch = useDispatch()
+  const history = useHistory()
 
   const [email, setEmail] = useState('')
   const inputEmailRef = useRef(null)
   
   const onButtonClick = (e) => {
     e.preventDefault()
+    dispatch(forgotUserPasswordThunk(email))
+    history.replaceState('/reset-password')
   }
 
   return (
