@@ -5,7 +5,7 @@ import { refreshTokenThunk } from '../../services/midleware/user-thunk';
 
 export const ProtectedRoute = ({ children, ...rest }) => {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const user = useSelector(state => state.userReducer);
 
   return (
@@ -15,7 +15,7 @@ export const ProtectedRoute = ({ children, ...rest }) => {
         sessionStorage.getItem('token') && !user.error ? (
           children
         ) : sessionStorage.getItem('token') && user.error ? (
-            dispatch(refreshTokenThunk())
+          dispatch(refreshTokenThunk())
         ) : (
           <Redirect
             to={{
@@ -27,4 +27,4 @@ export const ProtectedRoute = ({ children, ...rest }) => {
       }
     />
   );
-}
+};

@@ -1,7 +1,7 @@
-import styles from './app-header.module.css';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import Navigation from '../navigation/navigation';
 import Profile from '../profile/profile';
+import styles from './app-header.module.css';
 
 function AppHeader() {
   return (

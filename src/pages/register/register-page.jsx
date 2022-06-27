@@ -1,33 +1,29 @@
-import styles from './register-page.module.css';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Input, Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
-import { registrationUser } from '../../services/actions/user-actions';
 import { registrationUserThunk } from '../../services/midleware/user-thunk';
+import styles from './register-page.module.css';
 
 export function RegisterPage() {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const inputNameRef = useRef(null)
-  const inputEmailRef = useRef(null)
+  const inputNameRef = useRef(null);
+  const inputEmailRef = useRef(null);
 
   const onButtonClick = (e) => {
-    e.preventDefault()
-    // console.log(name)
-    // console.log(email)
-    // console.log(password)
+    e.preventDefault();
     dispatch(registrationUserThunk({
-      "email": email, 
-      "password": password, 
-      "name": name 
-  }))
-  }
+      'email': email, 
+      'password': password, 
+      'name': name 
+    }));
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -64,12 +60,12 @@ export function RegisterPage() {
           value={password}
           name={'password'}
         />
-        <Button type="primary" size="medium" onClick={onButtonClick}>
+        <Button type='primary' size='medium' onClick={onButtonClick}>
           Зарегистрироваться
         </Button>
         <p className={`${styles.text} mt-20`}>
           <span>Уже зарегистрированы?</span>
-          <span><Link className={styles.link} to="/login">Войти</Link></span>
+          <span><Link className={styles.link} to='/login'>Войти</Link></span>
         </p>
       </form>
     </div>
