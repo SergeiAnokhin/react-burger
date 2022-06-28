@@ -87,9 +87,10 @@ export const loginUserThunk = ({email, password}) => {
       .then((res) => {
         localStorage.setItem('token', res.refreshToken);
         sessionStorage.setItem('token', res.accessToken);
+        dispatch(errorUser(false));
         dispatch(loginUser(res));
         dispatch(loadingUser(false));
-        dispatch(errorUser(false));
+        
       })
       .catch(e => {
         dispatch(errorUser(true));

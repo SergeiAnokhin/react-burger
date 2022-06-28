@@ -11,22 +11,13 @@ export const constructorReducer = (state = initialState, action) => {
   case ADD_BUN:
     return {...state, 
       bun: [action.payload], 
-      allIngredientsId: 
-              state.bun.length === 0 && state.ingredients.length === 0 ? [action.payload._id, action.payload._id] : 
-                state.bun.length === 0 && state.ingredients.length !== 0 ? [action.payload._id, ...state.ingredients.map(item => item._id), action.payload._id] :
-                  state.bun.length !== 0 && state.ingredients.length === 0 ? [action.payload._id, action.payload._id] :
-                    state.bun.length !== 0 && state.ingredients.length !== 0 ? [action.payload._id, ...state.ingredients.map(item => item._id), action.payload._id] : 
-                      [...state.bun._id, ...state.ingredients.map(item => item._id), ...state.bun._id]};
+      allIngredientsId: [action.payload._id, ...state.ingredients.map(item => item._id), action.payload._id]
+    };
   case ADD_INGREDIENT:
     return {
       ...state, 
       ingredients: [...state.ingredients, action.payload], 
-      allIngredientsId: [
-        state.allIngredientsId[0],
-        ...state.ingredients.map(item => item._id),
-        action.payload._id,
-        state.allIngredientsId[state.allIngredientsId.length - 1]
-      ]
+      allIngredientsId: [...state.bun.map(item => item._id), ...state.ingredients.map(item => item._id), action.payload._id, ...state.bun.map(item => item._id)]
     };
   case DELETE_INGREDIENT:
     return {
