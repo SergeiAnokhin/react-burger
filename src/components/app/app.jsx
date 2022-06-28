@@ -50,9 +50,7 @@ function App() {
           <ProfilePage />
         </ProtectedRoute>
         <Route path='/login' exact>
-          {sessionStorage.getItem('token') && localStorage.getItem('token') && !user.loading ? <Redirect to='/' /> : 
-            user.loading ? <Preloader/> :
-              <LoginPage />}
+          <LoginPage />
         </Route>
         <Route path='/register' exact>
           <RegisterPage />
