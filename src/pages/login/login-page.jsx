@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUserThunk } from '../../services/midleware/user-thunk';
+import { loginUserThunk } from '../../services/requests/user-thunk';
 import { Preloader } from '../../components/preloader/preloader';
 import styles from './login-page.module.css';
 

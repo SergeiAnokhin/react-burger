@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, Redirect } from 'react-router-dom';
-import { registrationUserThunk } from '../../services/midleware/user-thunk';
+import { registrationUserThunk } from '../../services/requests/user-thunk';
 import styles from './register-page.module.css';
 
 export function RegisterPage() {

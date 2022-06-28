@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useLocation, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { forgotUserPasswordThunk } from '../../services/midleware/user-thunk';
+import { forgotUserPasswordThunk } from '../../services/requests/user-thunk';
 import styles from './forgot-password-page.module.css';
 
 

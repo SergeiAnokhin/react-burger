@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUserInfoThunk } from '../../services/midleware/user-thunk';
+import { updateUserInfoThunk } from '../../services/requests/user-thunk';
 import styles from './profile-info.module.css';
 
 

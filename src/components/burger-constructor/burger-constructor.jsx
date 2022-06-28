@@ -3,7 +3,7 @@ import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-de
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import { useHistory } from 'react-router-dom';
-import { getOrderThunk } from '../../services/midleware/order-thunk';
+import { getOrderThunk } from '../../services/requests/order-thunk';
 import { addIngredient, addBun  } from '../../services/actions/constructor-actions';
 import ConstructorItem from '../constructor-item/constructor-item';
 import styles from './burger-constructor.module.css';

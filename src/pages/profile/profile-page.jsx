@@ -1,7 +1,7 @@
 import { NavLink, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProfileInfo } from '../../components/profile-info/profile-info';
-import { logoutUserThunk } from '../../services/midleware/user-thunk';
+import { logoutUserThunk } from '../../services/requests/user-thunk';
 import { ProtectedRoute } from '../../components/ProtectedRoute/protected-route';
 import { Preloader } from '../../components/preloader/preloader';
 import styles from './profile-page.module.css';
