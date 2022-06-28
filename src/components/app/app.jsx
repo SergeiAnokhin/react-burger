@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { setIngredientsThunk } from '../../services/midleware/ingredients-thunk';
@@ -8,12 +8,10 @@ import { getUserInfoThunk, refreshTokenThunk } from '../../services/midleware/us
 import { MainPage, ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage, FeedPage, IngredientPage, NotFoundPage } from '../../pages';
 import { ProtectedRoute } from '../ProtectedRoute/protected-route';
 import Modal from '../modal/modal';
-import { Preloader } from '../preloader/preloader';
 
 function App() {
 
   const dispatch = useDispatch();
-  const user = useSelector(store => store.userReducer);
   const location = useLocation();
   const background = location.state?.background;
 
