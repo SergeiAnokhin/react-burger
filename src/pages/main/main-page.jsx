@@ -13,20 +13,11 @@ export function MainPage() {
   const {loading: isLoadingOrder, error: hasErrorOrder, open: isOrderDetailsOpened } = useSelector(state => state.orderReducer);
 
   return (
-        
-    isLoadingIngredients || isLoadingOrder || user.loading
-      ?   
-      <>    
-        <Preloader />
-        {!hasErrorIngredients && ingredients.length && <AppMain />} 
-        {!hasErrorIngredients && isIngredientDetailsOpened && <Modal title='Детали ингредиента'><IngredientDetails /></Modal>}
-        {!hasErrorOrder && isOrderDetailsOpened && <Modal title=''><OrderDetails /></Modal>}
-      </>  
-      :    
-      <>    
-        {!hasErrorIngredients && ingredients.length && <AppMain />} 
-        {!hasErrorIngredients && isIngredientDetailsOpened && <Modal title='Детали ингредиента'><IngredientDetails /></Modal>}
-        {!hasErrorOrder && isOrderDetailsOpened && <Modal title=''><OrderDetails /></Modal>}
-      </>        
+    <>    
+      {isLoadingIngredients || isLoadingOrder || user.loading ? <Preloader /> : ''}
+      {!hasErrorIngredients && ingredients.length && <AppMain />} 
+      {!hasErrorIngredients && isIngredientDetailsOpened && <Modal title='Детали ингредиента'><IngredientDetails /></Modal>}
+      {!hasErrorOrder && isOrderDetailsOpened && <Modal title=''><OrderDetails /></Modal>}
+    </>  
   );
 } 

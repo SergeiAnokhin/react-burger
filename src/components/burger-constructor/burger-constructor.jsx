@@ -23,6 +23,9 @@ function BurgerConstructor() {
   }, [bun, ingredients]);  
 
   const getOrder = () => {
+    if (!bun.length && ingredients.length) {
+      alert('Добавьте булку');
+    }
     if (user.auth && allIngredientsId.length && bun.length) {
       dispatch(getOrderThunk(allIngredientsId));
     }
