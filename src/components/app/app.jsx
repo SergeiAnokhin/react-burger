@@ -5,7 +5,7 @@ import AppHeader from '../app-header/app-header';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { setIngredientsThunk } from '../../services/midleware/ingredients-thunk';
 import { getUserInfoThunk, refreshTokenThunk } from '../../services/midleware/user-thunk';
-import { MainPage, ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage, FeedPage, IngredientPage } from '../../pages';
+import { MainPage, ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage, FeedPage, IngredientPage, NotFoundPage } from '../../pages';
 import { ProtectedRoute } from '../ProtectedRoute/protected-route';
 import Modal from '../modal/modal';
 import { Preloader } from '../preloader/preloader';
@@ -65,6 +65,9 @@ function App() {
         </Route>
         <Route path='/ingredients/:id'>
           <IngredientPage />
+        </Route>
+        <Route path='*'>
+          <NotFoundPage />
         </Route>
       </Switch>
 

@@ -34,7 +34,7 @@ export function RegisterPage() {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <main className={styles.wrapper}>
       <h1 className={styles.title}>Регистрация</h1>
       <form className={styles.form}>
         <Input
@@ -76,6 +76,6 @@ export function RegisterPage() {
           <span><Link className={styles.link} to='/login'>Войти</Link></span>
         </p>
       </form>
-    </div>
+    </main>
   );
 } 

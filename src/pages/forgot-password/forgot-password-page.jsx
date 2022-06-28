@@ -28,7 +28,7 @@ export function ForgotPasswordPage() {
 
   return (
     user.auth ? <Redirect to='/profile'/> :
-      <div className={styles.wrapper}>
+      <main className={styles.wrapper}>
         <h1 className={styles.title}>Восстановление пароля</h1>
         <form className={styles.form}>
           <Input
@@ -52,6 +52,6 @@ export function ForgotPasswordPage() {
             <span><Link className={styles.link} to='/login'>Войти</Link></span>
           </p>
         </form>
-      </div>
+      </main>
   );
 } 

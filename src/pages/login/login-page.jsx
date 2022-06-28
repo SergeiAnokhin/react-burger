@@ -36,7 +36,7 @@ export function LoginPage() {
   }, [user.error]);
 
   return (
-    <div className={styles.wrapper}>
+    <main className={styles.wrapper}>
       <h1 className={styles.title}>{title}</h1>
       <form className={styles.form}>
         <Input
@@ -69,6 +69,6 @@ export function LoginPage() {
           <span><Link className={styles.link} to='/forgot-password'>Восстановить пароль</Link></span>
         </p>
       </form>
-    </div>
+    </main>
   );
 } 

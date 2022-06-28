@@ -17,10 +17,10 @@ export function IngredientPage() {
   
 
   return (
-    <div className={styles.wrapper}>
+    <main className={styles.wrapper}>
       <h1 className={styles.title}>Детали ингредиента</h1>
       <IngredientDetails/>
-    </div>
+    </main>
         
   );
 } 

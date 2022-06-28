@@ -20,7 +20,7 @@ export function ProfilePage() {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <main className={styles.wrapper}>
 
       {/* Меню личного кабинета */}
       <div className={styles.profileMenu}>
@@ -50,6 +50,6 @@ export function ProfilePage() {
         </Switch>     
       </div>
         
-    </div>
+    </main>
   );
 } 
