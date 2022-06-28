@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, Redirect } from 'react-router-dom';

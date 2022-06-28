@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, useHistory, useLocation, Redirect } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUserThunk } from '../../services/midleware/user-thunk';
 import { Preloader } from '../../components/preloader/preloader';
@@ -11,7 +11,6 @@ export function LoginPage() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.userReducer);
   const history = useHistory();
-  const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [title, setTitle] = useState('Вход');

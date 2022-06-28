@@ -22,7 +22,6 @@ export function ProfilePage() {
   return (
     <main className={styles.wrapper}>
 
-      {/* Меню личного кабинета */}
       <div className={styles.profileMenu}>
         <ul className={styles.menuItems}>
           <li className={styles.menuItem}>
@@ -38,7 +37,6 @@ export function ProfilePage() {
         <p className={styles.menuText}>В этом разделе вы можете изменить свои персональные данные</p>
       </div>
 
-      {/* Контент контент личного кабинета */}
       <div className={styles.profileContent}>
         <Switch>
           <ProtectedRoute exact path='/profile'>
