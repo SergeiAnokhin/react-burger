@@ -23,10 +23,10 @@ function BurgerConstructor() {
   }, [bun, ingredients]);  
 
   const getOrder = () => {
-    if (user.auth) {
+    if (user.auth && allIngredientsId.length) {
       dispatch(getOrderThunk(allIngredientsId));
     }
-    if (!user.auth) {
+    if (!user.auth && allIngredientsId.length) {
       history.replace('/login');
     }
   };
