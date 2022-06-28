@@ -15,7 +15,7 @@ export function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const inputEmailRef = useRef(null);
   
-  const onButtonClick = (e) => {
+  const onSubmitForm = (e) => {
     e.preventDefault();
     dispatch(forgotUserPasswordThunk(email));
   };
@@ -30,7 +30,7 @@ export function ForgotPasswordPage() {
     user.auth ? <Redirect to='/profile'/> :
       <main className={styles.wrapper}>
         <h1 className={styles.title}>Восстановление пароля</h1>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={onSubmitForm}>
           <Input
             type={'email'}
             placeholder={'E-mail'}
@@ -44,7 +44,7 @@ export function ForgotPasswordPage() {
             errorText={'Ошибка'}
             size={'default'}
           />
-          <Button type='primary' size='medium' onClick={onButtonClick}>
+          <Button type='primary' size='medium'>
           Восстановить
           </Button>
           <p className={`${styles.text} mt-20`}>

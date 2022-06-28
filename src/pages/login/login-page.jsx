@@ -15,7 +15,7 @@ export function LoginPage() {
   const [title, setTitle] = useState('Вход');
   const inputEmailRef = useRef(null);
 
-  const onButtonClick = (e) => {
+  const onSubmitForm = (e) => {
     e.preventDefault();
     dispatch(loginUserThunk({
       email: email,
@@ -38,7 +38,7 @@ export function LoginPage() {
   return (
     <main className={styles.wrapper}>
       <h1 className={styles.title}>{title}</h1>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={onSubmitForm}>
         <Input
           type={'email'}
           placeholder={'E-mail'}
@@ -57,7 +57,7 @@ export function LoginPage() {
           value={password}
           name={'password'}
         />
-        <Button type='primary' size='medium' onClick={onButtonClick}>
+        <Button type='primary' size='medium'>
           Войти
         </Button>
         <p className={`${styles.text} mt-20`}>

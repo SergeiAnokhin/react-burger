@@ -14,7 +14,7 @@ export function ResetPasswordPage() {
   const location = useLocation();
   const user = useSelector(store => store.userReducer);
 
-  const onButtonClick = (e) => {
+  const onSubmitForm = (e) => {
     e.preventDefault();
     dispatch(resetUserPasswordThunk({
       password: password,
@@ -35,7 +35,7 @@ export function ResetPasswordPage() {
         <Redirect to='/profile'/> :
         <main className={styles.wrapper}>
           <h1 className={styles.title}>Восстановление пароля</h1>
-          <form className={styles.form}>
+          <form className={styles.form} onSubmit={onSubmitForm}>
             <PasswordInput 
               onChange={e => setPassword(e.target.value)}
               value={password}
@@ -54,7 +54,7 @@ export function ResetPasswordPage() {
               errorText={'Ошибка'}
               size={'default'}
             />
-            <Button type='primary' size='medium' onClick={onButtonClick}>
+            <Button type='primary' size='medium'>
           Сохранить
             </Button>
             <p className={`${styles.text} mt-20`}>

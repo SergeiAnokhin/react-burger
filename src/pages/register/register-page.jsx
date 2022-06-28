@@ -24,7 +24,7 @@ export function RegisterPage() {
     }
   }, [user.auth, history]);
 
-  const onButtonClick = (e) => {
+  const onSubmitForm = (e) => {
     e.preventDefault();
     dispatch(registrationUserThunk({
       'email': email, 
@@ -36,7 +36,7 @@ export function RegisterPage() {
   return (
     <main className={styles.wrapper}>
       <h1 className={styles.title}>Регистрация</h1>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={onSubmitForm}>
         <Input
           type={'text'}
           placeholder={'Имя'}
@@ -68,7 +68,7 @@ export function RegisterPage() {
           value={password}
           name={'password'}
         />
-        <Button type='primary' size='medium' onClick={onButtonClick}>
+        <Button type='primary' size='medium'>
           Зарегистрироваться
         </Button>
         <p className={`${styles.text} mt-20`}>
