@@ -1,4 +1,4 @@
-import { registrationUser, loginUser, loadingUser, errorUser, logoutUser, getUserInfo, updateUserInfo, forgotUserPassword, resetUserPassword, refreshTokenUser } from '../actions/user-actions';
+import { registrationUser, loginUser, loadingUser, errorUser, logoutUser, getUserInfo, updateUserInfo, forgotUserPassword, resetUserPassword } from '../actions/user-actions';
 import { URL_LOGIN, URL_REGISTRATION, URL_USER, URL_LOGOUT, URL_TOKEN, URL_FORGOT_PASSWORD, URL_RESET_PASSWORD } from './api';
 
 export const registrationUserThunk = ({email, password, name}) => {   
@@ -21,9 +21,8 @@ export const registrationUserThunk = ({email, password, name}) => {
       .then(res => {if (res.ok) {return res.json();}
         return Promise.reject(`Ошибка: ${res.status}`);})
       .then((res) => {
-        console.log('Registration================');
-        console.log(res);
-        console.log('Registration================');
+        localStorage.setItem('token', res.refreshToken);
+        sessionStorage.setItem('token', res.accessToken);
         dispatch(registrationUser(res));
         dispatch(loadingUser(false));
       })
@@ -56,9 +55,6 @@ export const updateUserInfoThunk = ({email, password, name}) => {
       .then(res => {if (res.ok) {return res.json();}
         return Promise.reject(`Ошибка: ${res.status}`);})
       .then((res) => {
-        console.log('UpdateUser================');
-        console.log(res);
-        console.log('UpdateUser================');
         dispatch(updateUserInfo(res));
         dispatch(loadingUser(false));
       })
@@ -89,9 +85,6 @@ export const loginUserThunk = ({email, password}) => {
       .then(res => {if (res.ok) {return res.json();}
         return Promise.reject(`Ошибка: ${res.status}`);})
       .then((res) => {
-        console.log('Login================');
-        console.log(res);
-        console.log('Login================');
         localStorage.setItem('token', res.refreshToken);
         sessionStorage.setItem('token', res.accessToken);
         dispatch(loginUser(res));
@@ -124,9 +117,6 @@ export const forgotUserPasswordThunk = (email) => {
       .then(res => {if (res.ok) {return res.json();}
         return Promise.reject(`Ошибка: ${res.status}`);})
       .then((res) => {
-        console.log('ForgotPassword================');
-        console.log(res);
-        console.log('ForgotPassword================');
         dispatch(forgotUserPassword(res));
         dispatch(loadingUser(false));
       })
@@ -157,9 +147,6 @@ export const resetUserPasswordThunk = ({password, token}) => {
       .then(res => {if (res.ok) {return res.json();}
         return Promise.reject(`Ошибка: ${res.status}`);})
       .then((res) => {
-        console.log('ResetPassword================');
-        console.log(res);
-        console.log('ResetPassword================');
         dispatch(resetUserPassword(res));
         dispatch(loadingUser(false));
       })
@@ -187,9 +174,6 @@ export const getUserInfoThunk = () => {
       .then(res => {if (res.ok) {return res.json();}
         return Promise.reject(`Ошибка: ${res.status}`);})
       .then((res) => {
-        console.log('UserInfo================');
-        console.log(res);
-        console.log('UserInfo================');
         dispatch(getUserInfo(res));
         dispatch(loadingUser(false));
       })
@@ -221,9 +205,6 @@ export const logoutUserThunk = () => {
       .then(res => {if (res.ok) {return res.json();}
         return Promise.reject(`Ошибка: ${res.status}`);})
       .then((res) => {
-        console.log('Logout================');
-        console.log(res);
-        console.log('Logout================');
         localStorage.removeItem('token');
         sessionStorage.removeItem('token');
         dispatch(logoutUser());
@@ -255,9 +236,6 @@ export const refreshTokenThunk = () => {
       .then(res => {if (res.ok) {return res.json();}
         return Promise.reject(`Ошибка: ${res.status}`);})
       .then((res) => {
-        console.log('RefreshToken================');
-        console.log(res);
-        console.log('RefreshToken================');
         localStorage.setItem('token', res.refreshToken);
         sessionStorage.setItem('token', res.accessToken);
       })

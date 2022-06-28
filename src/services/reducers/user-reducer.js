@@ -1,4 +1,4 @@
-import { REGISTRATION_USER, LOGIN_USER, LOGOUT_USER, REFRESH_TOKEN_USER, LOADING_USER, ERROR_USER, GET_USER_INFO, UPDATE_USER_INFO, FORGOT_USER_PASSWORD, RESET_USER_PASSWORD } from '../actions/types-actions';
+import { REGISTRATION_USER, LOGIN_USER, LOGOUT_USER, LOADING_USER, ERROR_USER, GET_USER_INFO, UPDATE_USER_INFO, FORGOT_USER_PASSWORD, RESET_USER_PASSWORD } from '../actions/types-actions';
 
 const initialState = {
   name: '',
@@ -27,8 +27,6 @@ export const userReducer = (state = initialState, action) => {
     return {...state, name: action.payload.user.name, email: action.payload.user.email, auth: action.payload.success};
   case LOGOUT_USER:
     return {...state, name: '', email: '', auth: false};
-  case REFRESH_TOKEN_USER:
-    return {...state, auth: action.payload.success};
   case LOADING_USER:
     return {...state, loading: action.payload};
   case ERROR_USER:
