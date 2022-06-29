@@ -1,6 +1,10 @@
 import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import {
+  Input,
+  Button,
+  PasswordInput
+} from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, Redirect } from 'react-router-dom';
 import { resetUserPasswordThunk } from '../../services/requests/user-thunk';
 import styles from './reset-password-page.module.css';

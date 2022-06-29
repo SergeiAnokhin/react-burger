@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { Input, Button, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import {
+  Input,
+  Button,
+  PasswordInput
+} from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUserThunk } from '../../services/requests/user-thunk';
@@ -35,8 +39,12 @@ export const LoginPage = () => {
     localStorage.getItem('token') &&
     !user.loading &&
     user.auth ? (
-    <Redirect to={history.location.state ? history.location.state.from.pathname : '/'} />
-  ) : sessionStorage.getItem('token') && localStorage.getItem('token') && user.loading ? (
+    <Redirect
+      to={history.location.state ? history.location.state.from.pathname : '/'}
+    />
+  ) : sessionStorage.getItem('token') &&
+    localStorage.getItem('token') &&
+    user.loading ? (
     <Preloader />
   ) : (
     <main className={styles.wrapper}>
@@ -64,7 +72,7 @@ export const LoginPage = () => {
           Войти
         </Button>
         <p className={`${styles.text} mt-20`}>
-          <span>Вы — новый пользователь?</span>
+          <span>Вы - новый пользователь?</span>
           <span>
             <Link className={styles.link} to="/register">
               Зарегистрироваться

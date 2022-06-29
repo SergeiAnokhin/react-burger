@@ -6,7 +6,11 @@ export const OrdersHistoryPage = () => (
     <div className={styles.profileMenu}>
       <ul className={styles.menuItems}>
         <li className={styles.menuItem}>
-          <NavLink to="/profile" className={styles.menuLink} activeClassName={styles.activeLink}>
+          <NavLink
+            to="/profile"
+            className={styles.menuLink}
+            activeClassName={styles.activeLink}
+          >
             Профиль
           </NavLink>
         </li>
@@ -29,7 +33,9 @@ export const OrdersHistoryPage = () => (
           </NavLink>
         </li>
       </ul>
-      <p className={styles.menuText}>В этом разделе вы можете изменить свои персональные данные</p>
+      <p className={styles.menuText}>
+        В этом разделе вы можете изменить свои персональные данные
+      </p>
     </div>
     <div className={styles.profileContent}>
       <h1>OrdersHistoryPage</h1>

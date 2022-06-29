@@ -12,7 +12,9 @@ export const MainPage = () => {
     loading: isLoadingIngredients,
     error: hasErrorIngredients
   } = useSelector((state) => state.ingredientsReducer);
-  const isIngredientDetailsOpened = useSelector((store) => store.itemReducer.open);
+  const isIngredientDetailsOpened = useSelector(
+    (store) => store.itemReducer.open
+  );
   const {
     loading: isLoadingOrder,
     error: hasErrorOrder,
@@ -21,7 +23,11 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLoadingIngredients || isLoadingOrder || user.loading ? <Preloader /> : ''}
+      {isLoadingIngredients || isLoadingOrder || user.loading ? (
+        <Preloader />
+      ) : (
+        ''
+      )}
       {!hasErrorIngredients && ingredients.length && <AppMain />}
       {!hasErrorIngredients && isIngredientDetailsOpened && (
         <Modal title="Детали ингредиента">

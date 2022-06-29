@@ -12,7 +12,7 @@ export const IngredientPage = () => {
   const itemId = location.pathname.split('/').slice(-1)[0];
   useEffect(() => {
     dispatch(ingredientId(itemId));
-  }, []);
+  }, [dispatch, itemId]);
 
   return (
     <main className={styles.wrapper}>

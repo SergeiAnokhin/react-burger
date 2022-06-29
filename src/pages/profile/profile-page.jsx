@@ -63,7 +63,9 @@ export const ProfilePage = () => {
             {!user.name ? <Preloader /> : <ProfileInfo />}
           </ProtectedRoute>
           <ProtectedRoute exact path="/profile/orders">
-            <h1 className={styles.historyTitle}>Здесь будет компонент с историей заказов.</h1>
+            <h1 className={styles.historyTitle}>
+              Здесь будет компонент с историей заказов.
+            </h1>
           </ProtectedRoute>
         </Switch>
       </div>
