@@ -1,13 +1,24 @@
-import styles from './profile.module.css';
 import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { NavLink, useLocation } from 'react-router-dom';
+import styles from './profile.module.css';
 
-function Profile() {
+const Profile = () => {
+  const location = useLocation();
+
   return (
-    <a className={styles.link} href="/">
-            <ProfileIcon type="secondary" />
-            <p className="text text_type_main-default text_color_inactive pl-2">Личный кабинет</p>
-    </a>
+    <NavLink className={styles.link} to="/profile">
+      <ProfileIcon
+        type={location.pathname === '/profile' ? 'primary' : 'secondary'}
+      />
+      <p
+        className={`text text_type_main-default pl-2 ${
+          location.pathname === '/profile' ? '' : 'text_color_inactive'
+        }`}
+      >
+        Личный кабинет
+      </p>
+    </NavLink>
   );
-}
+};
 
 export default Profile;

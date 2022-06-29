@@ -1,15 +1,20 @@
-import styles from './modal-overlay.module.css';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { openIngredientModal } from '../../services/actions/item-actions';
 import { openOrderModal } from '../../services/actions/order-actions';
+import styles from './modal-overlay.module.css';
 
-function ModalOverlay() {
+const ModalOverlay = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-    const dispatch = useDispatch()
+  const closeModal = () => {
+    dispatch(openIngredientModal(false));
+    dispatch(openOrderModal(false));
+    history.replace('/');
+  };
 
-    return (
-        <div className={styles.overlay} onClick={() => {dispatch(openIngredientModal(false)); dispatch(openOrderModal(false));}} />
-    );
-}
+  return <div className={styles.overlay} onClick={closeModal} />;
+};
 
 export default ModalOverlay;

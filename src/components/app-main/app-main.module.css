@@ -1,4 +1,4 @@
-@keyframes visible1 { 
+@keyframes visible { 
     0% { 
    opacity: 0; 
     } 
@@ -13,5 +13,5 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    animation: visible1 .3s linear;
+    animation: visible .3s linear;
 }
