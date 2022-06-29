@@ -9,4 +9,15 @@ import { MainPage } from './main/main-page';
 import { IngredientPage } from './ingredients/ingredients-page';
 import { NotFoundPage } from './not-found/not-found-page';
 
-export { MainPage, ProfilePage, ForgotPasswordPage, LoginPage, RegisterPage, ResetPasswordPage, OrdersHistoryPage, FeedPage, IngredientPage, NotFoundPage };
+export {
+  MainPage,
+  ProfilePage,
+  ForgotPasswordPage,
+  LoginPage,
+  RegisterPage,
+  ResetPasswordPage,
+  OrdersHistoryPage,
+  FeedPage,
+  IngredientPage,
+  NotFoundPage
+};

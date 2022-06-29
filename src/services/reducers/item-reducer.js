@@ -6,12 +6,12 @@ const initialState = {
 };
 
 export const itemReducer = (state = initialState, action) => {
-  switch(action.type) {
-  case OPEN_INGREDIENT_MODAL:
-    return {...state, open: action.payload};
-  case INGREDIENT_ID:
-    return {...state, itemId: action.payload};
-  default:
-    return state;
+  switch (action.type) {
+    case OPEN_INGREDIENT_MODAL:
+      return { ...state, open: action.payload };
+    case INGREDIENT_ID:
+      return { ...state, itemId: action.payload };
+    default:
+      return state;
   }
 };

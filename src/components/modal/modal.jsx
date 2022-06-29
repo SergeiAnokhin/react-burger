@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
@@ -12,17 +12,16 @@ import styles from './modal.module.css';
 const modalsContainer = document.querySelector('#modals');
 
 const Modal = (props) => {
-
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     dispatch(openIngredientModal(false));
     dispatch(openOrderModal(false));
     history.replace('/');
-  };
+  }, [dispatch, history]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const onEscKeydown = (event) => {
       event.key === 'Escape' && closeModal();
     };
@@ -31,24 +30,24 @@ const Modal = (props) => {
     return () => {
       document.removeEventListener('keydown', onEscKeydown);
     };
-  }, []);
+  }, [closeModal]);
 
-  return ReactDOM.createPortal (
+  return ReactDOM.createPortal(
     <>
       <div className={`${styles.modal} p-10`}>
         <h3 className={styles.title}>{props.title}</h3>
-        {props.children} 
+        {props.children}
         <div className={styles.closeIcon} onClick={closeModal}>
-          <CloseIcon type='primary' />
+          <CloseIcon type="primary" />
         </div>
       </div>
-      <ModalOverlay /> 
+      <ModalOverlay />
     </>,
     modalsContainer
   );
 };
 
-Modal.propTypes = { 
+Modal.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node
 };

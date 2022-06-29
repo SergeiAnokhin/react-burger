@@ -1,13 +1,20 @@
-import { SET_INGREDIENTS, LOADING_INGREDIENTS, ERROR_INGREDIENTS } from '../actions/types-actions';
+import {
+  SET_INGREDIENTS,
+  LOADING_INGREDIENTS,
+  ERROR_INGREDIENTS
+} from '../actions/types-actions';
 
-export const setIngredients = (res) => {
-  return {type: SET_INGREDIENTS, payload: res};
-};
+export const setIngredients = (res) => ({
+  type: SET_INGREDIENTS,
+  payload: res
+});
 
-export const loadingIngredients = (value) => {
-  return {type: LOADING_INGREDIENTS, payload: value};
-};
+export const loadingIngredients = (value) => ({
+  type: LOADING_INGREDIENTS,
+  payload: value
+});
 
-export const errorIngredients = (value) => {
-  return {type: ERROR_INGREDIENTS, payload: value};
-};
+export const errorIngredients = (value) => ({
+  type: ERROR_INGREDIENTS,
+  payload: value
+});

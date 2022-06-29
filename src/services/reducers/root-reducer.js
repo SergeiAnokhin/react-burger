@@ -7,7 +7,7 @@ import { userReducer } from './user-reducer';
 
 export const rootReducer = combineReducers({
   ingredientsReducer,
-  itemReducer, 
+  itemReducer,
   constructorReducer,
   orderReducer,
   userReducer

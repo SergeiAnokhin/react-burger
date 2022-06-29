@@ -4,8 +4,7 @@ import { openIngredientModal } from '../../services/actions/item-actions';
 import { openOrderModal } from '../../services/actions/order-actions';
 import styles from './modal-overlay.module.css';
 
-function ModalOverlay() {
-
+const ModalOverlay = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -15,9 +14,7 @@ function ModalOverlay() {
     history.replace('/');
   };
 
-  return (
-    <div className={styles.overlay} onClick={closeModal} />
-  );
-}
+  return <div className={styles.overlay} onClick={closeModal} />;
+};
 
 export default ModalOverlay;

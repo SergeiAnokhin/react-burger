@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import {
+  Input,
+  Button
+} from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUserInfoThunk } from '../../services/requests/user-thunk';
 import styles from './profile-info.module.css';
 
-
-export function ProfileInfo() {
-
+export const ProfileInfo = () => {
   const dispatch = useDispatch();
-  const user = useSelector(store => store.userReducer);
+  const user = useSelector((store) => store.userReducer);
 
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
@@ -89,11 +90,13 @@ export function ProfileInfo() {
 
   const handlerSave = (e) => {
     e.preventDefault();
-    dispatch(updateUserInfoThunk({
-      'email': email, 
-      'password': password, 
-      'name': name 
-    }));
+    dispatch(
+      updateUserInfoThunk({
+        email: email,
+        password: password,
+        name: name
+      })
+    );
   };
 
   return (
@@ -101,7 +104,7 @@ export function ProfileInfo() {
       <Input
         type={'text'}
         placeholder={'Имя'}
-        onChange={e => setName(e.target.value)}
+        onChange={(e) => setName(e.target.value)}
         icon={inputNameIcon}
         value={name}
         name={'name'}
@@ -115,7 +118,7 @@ export function ProfileInfo() {
       <Input
         type={'email'}
         placeholder={'Логин'}
-        onChange={e => setEmail(e.target.value)}
+        onChange={(e) => setEmail(e.target.value)}
         icon={inputEmailIcon}
         value={email}
         name={'email'}
@@ -129,7 +132,7 @@ export function ProfileInfo() {
       <Input
         type={'password'}
         placeholder={'Пароль'}
-        onChange={e => setPassword(e.target.value)}
+        onChange={(e) => setPassword(e.target.value)}
         icon={inputPasswordIcon}
         value={password}
         name={'password'}
@@ -140,13 +143,30 @@ export function ProfileInfo() {
         size={'default'}
         disabled={editPassword}
       />
-      {name !== user.name || email !== user.email || password !== user.password 
-        ? 
+      {name !== user.name ||
+      email !== user.email ||
+      password !== user.password ? (
         <div className={styles.btns}>
-          <Button type='secondary' size='medium' className={styles.btn} onClick={handlerReset}>Отмена</Button>
-          <Button type='primary' size='medium' className={styles.btn} onClick={handlerSave}>Сохранить</Button>
+          <Button
+            type="secondary"
+            size="medium"
+            className={styles.btn}
+            onClick={handlerReset}
+          >
+            Отмена
+          </Button>
+          <Button
+            type="primary"
+            size="medium"
+            className={styles.btn}
+            onClick={handlerSave}
+          >
+            Сохранить
+          </Button>
         </div>
-        : ''}
+      ) : (
+        ''
+      )}
     </form>
   );
-} 
+};

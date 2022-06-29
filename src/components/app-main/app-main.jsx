@@ -4,15 +4,13 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import styles from './app-main.module.css';
 
-function AppMain() {
-  return (
-    <main className={`${styles.main} pl-5 pr-5`}>
-      <DndProvider backend={HTML5Backend}>
-        <BurgerIngredients />
-        <BurgerConstructor />
-      </DndProvider>
-    </main>
-  );
-}
+const AppMain = () => (
+  <main className={`${styles.main} pl-5 pr-5`}>
+    <DndProvider backend={HTML5Backend}>
+      <BurgerIngredients />
+      <BurgerConstructor />
+    </DndProvider>
+  </main>
+);
 
 export default AppMain;

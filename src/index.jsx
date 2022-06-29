@@ -3,9 +3,7 @@ import './index.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './components/app/app';
-import reportWebVitals from './reportWebVitals';
 import { store } from './services/index';
-
 
 ReactDOM.render(
   <Provider store={store}>
@@ -15,5 +13,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-
-reportWebVitals();
