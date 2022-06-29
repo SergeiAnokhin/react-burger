@@ -35,7 +35,7 @@ const ConstructorItem = ({ elem, index }) => {
     }),
     drop(id) {
       const dragElementIndex = ingredients.findIndex(
-        (item, i) => item.nanoid === id.id
+        (item) => item.nanoid === id.id
       );
       const dropElementIndex = index;
 
