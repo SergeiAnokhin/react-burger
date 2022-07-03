@@ -20,6 +20,7 @@ import {
   NotFoundPage
 } from '../../pages';
 import { ProtectedRoute } from '../ProtectedRoute/protected-route';
+import { wsConnectionStart } from '../../services/actions/ws-actions';
 import Modal from '../modal/modal';
 
 const App = () => {
@@ -41,6 +42,10 @@ const App = () => {
 
   useEffect(() => {
     dispatch(setIngredientsThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(wsConnectionStart('wss://norma.nomoreparties.space/orders/all'));
   }, [dispatch]);
 
   return (
