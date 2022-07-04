@@ -80,7 +80,13 @@ export const FeedOrders = () => {
                 )}
               </div>
               <div className={styles.price}>
-                <p className={styles.count}>510</p>
+                <p className={styles.count}>
+                  {item.ingredients
+                    .map((elem) =>
+                      ingredients.find((elem1) => elem === elem1._id)
+                    )
+                    .reduce((acc, obj) => acc + obj.price, 0)}
+                </p>
                 <CurrencyIcon type="primary" />
               </div>
             </div>

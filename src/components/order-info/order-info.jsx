@@ -47,6 +47,17 @@ export const OrderInfo = () => {
           </div>
         ))}
       </div>
+      <div className={styles.info}>
+        <div className={styles.date}>{order.createdAt}</div>
+        <div className={styles.total}>
+          <p>
+            {order.ingredients
+              .map((elem) => ingredients.find((elem1) => elem === elem1._id))
+              .reduce((acc, obj) => acc + obj.price, 0)}
+          </p>
+          <CurrencyIcon />
+        </div>
+      </div>
     </>
   );
 };
