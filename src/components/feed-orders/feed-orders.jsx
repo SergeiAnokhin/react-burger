@@ -24,7 +24,7 @@ export const FeedOrders = () => {
               <div className={styles.id}>#{item.number}</div>
               <div className={styles.date}>{formatDate(item.createdAt)}</div>
             </div>
-            <h2 className={styles.title}>{item.name}</h2>
+            <h2 className={styles.titleItem}>{item.name}</h2>
             <div className={styles.info}>
               <div
                 className={styles.ingredients}

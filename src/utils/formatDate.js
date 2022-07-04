@@ -1,11 +1,10 @@
-export function formatDate(ISOString) {
-  const millisecondsInDay = 86400000;
-  const currentDate = new Date();
-  const orderDate = new Date(ISOString);
-  const beginOfCurrentDate =
-    currentDate.getTime() - (currentDate.getTime() % millisecondsInDay);
-  const diffInMsc = beginOfCurrentDate - new Date(ISOString).getTime();
-  let diffDays = diffInMsc / millisecondsInDay;
+export function formatDate(value) {
+  const msInDay = 86400000;
+  const date = new Date();
+  const orderDate = new Date(value);
+  const beginOfDate = date.getTime() - (date.getTime() % msInDay);
+  const diffInMs = beginOfDate - new Date(value).getTime();
+  let diffDays = diffInMs / msInDay;
   let daysBetween;
   if (diffDays <= 0) {
     daysBetween = 'Сегодня';
