@@ -3,6 +3,7 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { nanoid } from 'nanoid';
+import { formatDate } from '../../utils/formatDate';
 import styles from './feed-orders.module.css';
 
 export const FeedOrders = () => {
@@ -21,7 +22,7 @@ export const FeedOrders = () => {
           >
             <div className={styles.header}>
               <div className={styles.id}>#{item.number}</div>
-              <div className={styles.date}>{item.createdAt}</div>
+              <div className={styles.date}>{formatDate(item.createdAt)}</div>
             </div>
             <h2 className={styles.title}>{item.name}</h2>
             <div className={styles.info}>
