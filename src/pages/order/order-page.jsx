@@ -1,13 +1,16 @@
+import { useSelector } from 'react-redux';
 import { OrderInfo } from '../../components/order-info/order-info';
+import { Preloader } from '../../components/preloader/preloader';
 import styles from './order-page.module.css';
 
-export const OrderPage = () => (
-  //   const itemId = location.pathname.split('/').slice(-1)[0];
-  //   useEffect(() => {
-  //     dispatch(ingredientId(itemId));
-  //   }, [dispatch, itemId]);
+export const OrderPage = () => {
+  const { orders } = useSelector((store) => store.wsReducer);
 
-  <main className={styles.wrapper}>
-    <OrderInfo />
-  </main>
-);
+  return orders.length ? (
+    <main className={styles.wrapper}>
+      <OrderInfo />
+    </main>
+  ) : (
+    <Preloader />
+  );
+};

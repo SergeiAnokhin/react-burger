@@ -2,23 +2,20 @@ import { nanoid } from 'nanoid';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Preloader } from '../preloader/preloader';
 import styles from './order-info.module.css';
 import { formatDate } from '../../utils/formatDate';
 
 export const OrderInfo = () => {
   const [order, setOrder] = useState('');
-  const itemId = location.pathname.split('/feed/:').slice(-1)[0];
+  const itemId = location.pathname.split('/').slice(-1)[0];
   const { ingredients } = useSelector((store) => store.ingredientsReducer);
   const { orders } = useSelector((store) => store.wsReducer);
 
   useEffect(() => {
     setOrder(orders.find((item) => itemId === item._id));
-  }, [orders, itemId]);
+  }, []);
 
-  return !order ? (
-    <Preloader />
-  ) : (
+  return order ? (
     <>
       <div className={styles.number}>{`#${order.number}`}</div>
       <h1 className={styles.title}>{order.name}</h1>
@@ -60,5 +57,7 @@ export const OrderInfo = () => {
         </div>
       </div>
     </>
+  ) : (
+    ''
   );
 };

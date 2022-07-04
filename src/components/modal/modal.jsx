@@ -14,11 +14,12 @@ const modalsContainer = document.querySelector('#modals');
 const Modal = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const path = history.location.pathname.split('/')[1];
 
   const closeModal = useCallback(() => {
     dispatch(openIngredientModal(false));
     dispatch(openOrderModal(false));
-    history.replace('/');
+    history.replace(path === 'ingredients' ? '/' : `/${path}`);
   }, [dispatch, history]);
 
   useEffect(() => {

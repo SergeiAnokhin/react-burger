@@ -23,6 +23,7 @@ import {
 import { ProtectedRoute } from '../ProtectedRoute/protected-route';
 import { wsConnectionStart } from '../../services/actions/ws-actions';
 import Modal from '../modal/modal';
+import { OrderInfo } from '../order-info/order-info';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -92,6 +93,13 @@ const App = () => {
         <Route path="/ingredients/:id">
           <Modal title="Детали ингредиента">
             <IngredientDetails />
+          </Modal>
+        </Route>
+      )}
+      {background && (
+        <Route path="/feed/:id">
+          <Modal title="">
+            <OrderInfo />
           </Modal>
         </Route>
       )}

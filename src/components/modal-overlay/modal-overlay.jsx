@@ -7,11 +7,12 @@ import styles from './modal-overlay.module.css';
 const ModalOverlay = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const path = history.location.pathname.split('/')[1];
 
   const closeModal = () => {
     dispatch(openIngredientModal(false));
     dispatch(openOrderModal(false));
-    history.replace('/');
+    history.replace(path === 'ingredients' ? '/' : `/${path}`);
   };
 
   return <div className={styles.overlay} onClick={closeModal} />;

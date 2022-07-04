@@ -1,7 +1,7 @@
 import React from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { formatDate } from '../../utils/formatDate';
 import styles from './feed-orders.module.css';
@@ -9,22 +9,26 @@ import styles from './feed-orders.module.css';
 export const FeedOrders = () => {
   const { orders } = useSelector((store) => store.wsReducer);
   const { ingredients } = useSelector((store) => store.ingredientsReducer);
+  const location = useLocation();
 
   return (
     <div className={styles.feed}>
       <h1 className={styles.title}>Лента заказов</h1>
       <div className={styles.orders}>
         {orders.map((item) => (
-          <NavLink
+          <Link
             key={nanoid()}
-            to={`/feed/:${item._id}`}
+            to={{
+              pathname: `/feed/${item._id}`,
+              state: { background: location }
+            }}
             className={styles.order}
           >
             <div className={styles.header}>
               <div className={styles.id}>#{item.number}</div>
               <div className={styles.date}>{formatDate(item.createdAt)}</div>
             </div>
-            <h2 className={styles.titleItem}>{item.name}</h2>
+            <h2 className={styles.title}>{item.name}</h2>
             <div className={styles.info}>
               <div
                 className={styles.ingredients}
@@ -91,7 +95,7 @@ export const FeedOrders = () => {
                 <CurrencyIcon type="primary" />
               </div>
             </div>
-          </NavLink>
+          </Link>
         ))}
       </div>
     </div>
