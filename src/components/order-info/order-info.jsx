@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Preloader } from '../preloader/preloader';
 import styles from './order-info.module.css';
+import { formatDate } from '../../utils/formatDate';
 
 export const OrderInfo = () => {
   const [order, setOrder] = useState('');
@@ -48,7 +49,7 @@ export const OrderInfo = () => {
         ))}
       </div>
       <div className={styles.info}>
-        <div className={styles.date}>{order.createdAt}</div>
+        <div className={styles.date}>{formatDate(order.createdAt)}</div>
         <div className={styles.total}>
           <p>
             {order.ingredients
