@@ -32,7 +32,6 @@
 }
 
 .order {
-  list-style: none;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -44,6 +43,12 @@
     0px 0px 1px rgba(0, 0, 0, 0.04);
   border-radius: 40px;
   box-sizing: border-box;
+  text-decoration: none;
+  transition: all 0.3s linear;
+}
+
+.order:hover {
+  background: #222;
 }
 
 .header {

@@ -8,6 +8,7 @@ import { FeedPage } from './feed/feed-page';
 import { MainPage } from './main/main-page';
 import { IngredientPage } from './ingredients/ingredients-page';
 import { NotFoundPage } from './not-found/not-found-page';
+import { OrderPage } from './order/order-page';
 
 export {
   MainPage,
@@ -19,5 +20,6 @@ export {
   OrdersHistoryPage,
   FeedPage,
   IngredientPage,
-  NotFoundPage
+  NotFoundPage,
+  OrderPage
 };

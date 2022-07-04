@@ -17,7 +17,8 @@ import {
   ResetPasswordPage,
   FeedPage,
   IngredientPage,
-  NotFoundPage
+  NotFoundPage,
+  OrderPage
 } from '../../pages';
 import { ProtectedRoute } from '../ProtectedRoute/protected-route';
 import { wsConnectionStart } from '../../services/actions/ws-actions';
@@ -57,6 +58,9 @@ const App = () => {
         </Route>
         <Route exact path="/feed">
           <FeedPage />
+        </Route>
+        <Route exact path="/feed/:id">
+          <OrderPage />
         </Route>
         <ProtectedRoute exact path="/profile">
           <ProfilePage />

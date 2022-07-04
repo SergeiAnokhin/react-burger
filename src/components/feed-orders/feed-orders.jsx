@@ -1,5 +1,8 @@
+import React from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 import styles from './feed-orders.module.css';
 
 export const FeedOrders = () => {
@@ -9,9 +12,13 @@ export const FeedOrders = () => {
   return (
     <div className={styles.feed}>
       <h1 className={styles.title}>Лента заказов</h1>
-      <ul className={styles.orders}>
+      <div className={styles.orders}>
         {orders.map((item) => (
-          <li className={styles.order} key={item._id}>
+          <NavLink
+            key={nanoid()}
+            to={`/feed/:${item._id}`}
+            className={styles.order}
+          >
             <div className={styles.header}>
               <div className={styles.id}>#{item.number}</div>
               <div className={styles.date}>{item.createdAt}</div>
@@ -32,26 +39,23 @@ export const FeedOrders = () => {
                   )
                 ].map((item1, i) =>
                   i < 5 ? (
-                    <>
-                      <div
-                        key={i}
-                        className={styles.iconWrapper}
-                        style={{
-                          zIndex: 5 - i,
-                          transform: `translateX(${(5 - i) * 13}px)`
-                        }}
-                      >
-                        <img
-                          className={styles.icon}
-                          src={item1.image_mobile}
-                          alt=""
-                        />
-                      </div>
-                    </>
+                    <div
+                      key={nanoid()}
+                      className={styles.iconWrapper}
+                      style={{
+                        zIndex: 5 - i,
+                        transform: `translateX(${(5 - i) * 13}px)`
+                      }}
+                    >
+                      <img
+                        className={styles.icon}
+                        src={item1.image_mobile}
+                        alt=""
+                      />
+                    </div>
                   ) : i === 5 ? (
-                    <>
+                    <React.Fragment key={nanoid()}>
                       <div
-                        key={i}
                         className={styles.iconWrapper}
                         style={{
                           zIndex: 5 - i,
@@ -69,7 +73,7 @@ export const FeedOrders = () => {
                           ? `+${[...new Set(item.ingredients)].length - 1 - i}`
                           : ''}
                       </p>
-                    </>
+                    </React.Fragment>
                   ) : (
                     ''
                   )
@@ -80,9 +84,9 @@ export const FeedOrders = () => {
                 <CurrencyIcon type="primary" />
               </div>
             </div>
-          </li>
+          </NavLink>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

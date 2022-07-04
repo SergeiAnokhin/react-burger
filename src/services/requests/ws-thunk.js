@@ -28,9 +28,8 @@ export const wsMiddleware = (wsUrl) => (store) => {
 
       socket.onmessage = (event) => {
         const { data } = event;
-        const data1 = JSON.parse(data);
-        console.log(data1);
-        dispatch({ type: WS_GET_MESSAGE, payload: data1 });
+        const dataObj = JSON.parse(data);
+        dispatch({ type: WS_GET_MESSAGE, payload: dataObj });
       };
 
       socket.onclose = (event) => {
