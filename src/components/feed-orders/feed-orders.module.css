@@ -1,5 +1,5 @@
 .feed {
-  width: 608px;
+  width: 630px;
 }
 
 .title {
@@ -49,7 +49,7 @@
 }
 
 .order:hover {
-  background: #222;
+  background: #1c1d2c;
 }
 
 .header {
