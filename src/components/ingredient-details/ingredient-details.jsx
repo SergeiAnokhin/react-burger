@@ -1,15 +1,23 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Preloader } from '../preloader/preloader';
 import styles from './ingredient-details.module.css';
 
 const IngredientDetails = () => {
-  const itemId = useSelector((store) => store.itemReducer.itemId);
-  const { ingredients } = useSelector((store) => store.ingredientsReducer);
+  const history = useHistory();
+  const itemId = location.pathname.split('/').slice(-1)[0];
   const ingredient = useSelector(
     (store) => store.ingredientsReducer.ingredients
   ).find((elem) => elem._id === itemId);
 
-  return !ingredients.length ? (
+  const { open } = useSelector((store) => store.itemReducer);
+
+  useEffect(() => {
+    !open ? history.replace(`/ingredients/${itemId}`) : '';
+  }, []);
+
+  return !ingredient ? (
     <Preloader />
   ) : (
     <>

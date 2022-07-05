@@ -2,17 +2,24 @@ import { nanoid } from 'nanoid';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './order-info.module.css';
+import { useHistory } from 'react-router-dom';
 import { formatDate } from '../../utils/formatDate';
+import styles from './order-info.module.css';
 
 export const OrderInfo = () => {
   const [order, setOrder] = useState('');
   const itemId = location.pathname.split('/').slice(-1)[0];
   const { ingredients } = useSelector((store) => store.ingredientsReducer);
   const { orders } = useSelector((store) => store.wsReducer);
+  const { open } = useSelector((store) => store.itemReducer);
+  const history = useHistory();
 
   useEffect(() => {
     setOrder(orders.find((item) => itemId === item._id));
+  }, []);
+
+  useEffect(() => {
+    !open ? history.replace(`/feed/${itemId}`) : '';
   }, []);
 
   return order ? (

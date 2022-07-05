@@ -1,15 +1,21 @@
 import React from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { formatDate } from '../../utils/formatDate';
+import { openIngredientModal } from '../../services/actions/item-actions';
 import styles from './feed-orders.module.css';
 
 export const FeedOrders = () => {
+  const dispatch = useDispatch();
   const { orders } = useSelector((store) => store.wsReducer);
   const { ingredients } = useSelector((store) => store.ingredientsReducer);
   const location = useLocation();
+
+  const handleClickItem = () => {
+    dispatch(openIngredientModal(true));
+  };
 
   return (
     <div className={styles.feed}>
@@ -23,6 +29,7 @@ export const FeedOrders = () => {
               state: { background: location }
             }}
             className={styles.order}
+            onClick={handleClickItem}
           >
             <div className={styles.header}>
               <div className={styles.id}>#{item.number}</div>

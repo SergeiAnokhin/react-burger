@@ -7,7 +7,10 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
-import { ingredientId } from '../../services/actions/item-actions';
+import {
+  ingredientId,
+  openIngredientModal
+} from '../../services/actions/item-actions';
 import styles from './ingredients-item.module.css';
 
 const IngredientsItem = (props) => {
@@ -20,6 +23,7 @@ const IngredientsItem = (props) => {
   const id = props.id;
 
   const handleClickItem = () => {
+    dispatch(openIngredientModal(true));
     dispatch(ingredientId(props.id));
   };
 
