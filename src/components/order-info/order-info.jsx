@@ -29,7 +29,11 @@ export const OrderInfo = () => {
 
   return order ? (
     <>
-      <div className={styles.number}>{`#${order.number}`}</div>
+      <div
+        className={
+          !open ? `${styles.number} ${styles.numberCenter}` : styles.number
+        }
+      >{`#${order.number}`}</div>
       <h1 className={styles.title}>{order.name}</h1>
       <div className={styles.status}>
         {order.status === 'done' ? 'Выполнен' : 'В работе'}

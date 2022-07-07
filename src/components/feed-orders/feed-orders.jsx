@@ -11,7 +11,7 @@ export const FeedOrders = ({ orders }) => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector((store) => store.ingredientsReducer);
   const location = useLocation();
-  console.log(location.pathname);
+
   const handleClickItem = () => {
     dispatch(openIngredientModal(true));
   };

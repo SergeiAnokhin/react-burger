@@ -9,6 +9,10 @@
   align-self: flex-start;
 }
 
+.numberCenter {
+  align-self: center;
+}
+
 .title {
   font-family: 'Jet Brains Mono';
   font-style: normal;
