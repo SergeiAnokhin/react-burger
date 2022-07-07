@@ -9,10 +9,9 @@ import styles from './feed-orders.module.css';
 
 export const FeedOrders = ({ orders }) => {
   const dispatch = useDispatch();
-  // const { orders } = useSelector((store) => store.wsReducer);
   const { ingredients } = useSelector((store) => store.ingredientsReducer);
   const location = useLocation();
-
+  console.log(location.pathname);
   const handleClickItem = () => {
     dispatch(openIngredientModal(true));
   };
@@ -23,7 +22,7 @@ export const FeedOrders = ({ orders }) => {
         <Link
           key={nanoid()}
           to={{
-            pathname: `/feed/${item._id}`,
+            pathname: `${location.pathname}/${item._id}`,
             state: { background: location }
           }}
           className={styles.order}
@@ -34,6 +33,19 @@ export const FeedOrders = ({ orders }) => {
             <div className={styles.date}>{formatDate(item.createdAt)}</div>
           </div>
           <h2 className={styles.title}>{item.name}</h2>
+          {location.pathname === '/profile/orders' ? (
+            <div
+              className={
+                item.status === 'done'
+                  ? `${styles.status} ${styles.ready}`
+                  : styles.status
+              }
+            >
+              {item.status === 'done' ? 'Выполнен' : 'Готовится'}
+            </div>
+          ) : (
+            ''
+          )}
           <div className={styles.info}>
             <div
               className={styles.ingredients}

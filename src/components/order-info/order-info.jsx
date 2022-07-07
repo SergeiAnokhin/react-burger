@@ -10,16 +10,21 @@ export const OrderInfo = () => {
   const [order, setOrder] = useState('');
   const itemId = location.pathname.split('/').slice(-1)[0];
   const { ingredients } = useSelector((store) => store.ingredientsReducer);
-  const { orders } = useSelector((store) => store.wsReducer);
+  const { orders: allOrders } = useSelector((store) => store.wsReducer);
+  const { orders: userOrders } = useSelector((store) => store.wsUserReducer);
   const { open } = useSelector((store) => store.itemReducer);
   const history = useHistory();
+  const orders =
+    location.pathname.split('/').slice(1, -1).join('/') === 'feed'
+      ? allOrders
+      : userOrders;
 
   useEffect(() => {
     setOrder(orders.find((item) => itemId === item._id));
   }, []);
 
   useEffect(() => {
-    !open ? history.replace(`/feed/${itemId}`) : '';
+    !open ? history.replace(`${location.pathname}`) : '';
   }, []);
 
   return order ? (

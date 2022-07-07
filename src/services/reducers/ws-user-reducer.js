@@ -37,7 +37,7 @@ export const wsUserReducer = (state = initialState, action) => {
       return {
         ...state,
         error: false,
-        orders: [...action.payload.orders],
+        orders: [...action.payload.orders].reverse(),
         total: action.payload.total,
         totalToday: action.payload.totalToday
       };

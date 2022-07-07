@@ -5,8 +5,9 @@ import {
   WS_USER_CONNECTION_ERROR,
   WS_USER_GET_MESSAGE
 } from '../actions/types-actions';
+import { URL_GET_ORDERS } from './api';
 
-export const wsUserMiddleware = (wsUrl) => (store) => {
+export const wsUserMiddleware = () => (store) => {
   let socket = null;
 
   return (next) => (action) => {
@@ -14,7 +15,11 @@ export const wsUserMiddleware = (wsUrl) => (store) => {
     const { type } = action;
 
     if (type === WS_USER_CONNECTION_START) {
-      socket = new WebSocket(wsUrl);
+      socket = new WebSocket(
+        `${URL_GET_ORDERS}?token=${
+          sessionStorage.getItem('token').split('Bearer ')[1]
+        }`
+      );
     }
 
     if (socket) {

@@ -7,7 +7,7 @@ import styles from './modal-overlay.module.css';
 const ModalOverlay = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const path = history.location.pathname.split('/')[1];
+  const path = history.location.pathname.split('/').slice(1, -1).join('/');
 
   const closeModal = () => {
     dispatch(openIngredientModal(false));

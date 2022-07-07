@@ -16,11 +16,7 @@ const enhancer = composeEnhancers(
   applyMiddleware(
     thunk,
     wsMiddleware(`${URL_GET_ORDERS}/all`),
-    wsUserMiddleware(
-      `${URL_GET_ORDERS}?token=${
-        sessionStorage.getItem('token').split('Bearer ')[1]
-      }`
-    )
+    wsUserMiddleware()
   )
 );
 

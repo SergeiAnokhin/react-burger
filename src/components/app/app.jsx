@@ -70,6 +70,9 @@ const App = () => {
         <ProtectedRoute exact path="/profile/orders">
           <ProfilePage />
         </ProtectedRoute>
+        <ProtectedRoute exact path="/profile/orders/:id">
+          <OrderPage />
+        </ProtectedRoute>
         <Route path="/login" exact>
           <LoginPage />
         </Route>
@@ -99,6 +102,13 @@ const App = () => {
       )}
       {background && (
         <Route path="/feed/:id">
+          <Modal title="">
+            <OrderInfo />
+          </Modal>
+        </Route>
+      )}
+      {background && (
+        <Route path="/profile/orders/:id">
           <Modal title="">
             <OrderInfo />
           </Modal>

@@ -1,6 +1,6 @@
 import { NavLink, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ProfileInfo } from '../../components/profile-info/profile-info';
 import { logoutUserThunk } from '../../services/requests/user-thunk';
 import { ProtectedRoute } from '../../components/ProtectedRoute/protected-route';
@@ -11,7 +11,6 @@ import { wsUserConnectionStart } from '../../services/actions/ws-user-actions';
 import styles from './profile-page.module.css';
 
 export const ProfilePage = () => {
-  const [orders1, setOrders1] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((store) => store.userReducer);
   const { orders } = useSelector((store) => store.wsUserReducer);
@@ -22,17 +21,15 @@ export const ProfilePage = () => {
   };
 
   useEffect(() => {
-    setOrders1(orders);
-  }, [orders]);
-
-  useEffect(() => {
-    dispatch(
-      wsUserConnectionStart(
-        `${URL_GET_ORDERS}?token=${
-          sessionStorage.getItem('token').split('Bearer ')[1]
-        }`
-      )
-    );
+    if (sessionStorage.getItem('token')) {
+      dispatch(
+        wsUserConnectionStart(
+          `${URL_GET_ORDERS}?token=${
+            sessionStorage.getItem('token').split('Bearer ')[1]
+          }`
+        )
+      );
+    }
   }, []);
 
   return (
