@@ -5,3 +5,5 @@ export const URL_ORDER = 'https://norma.nomoreparties.space/api/orders';
 export const URL_AUTH_USER = 'https://norma.nomoreparties.space/api/auth';
 export const URL_RESET_PASSWORD =
   'https://norma.nomoreparties.space/api/password-reset';
+
+export const URL_GET_ORDERS = 'wss://norma.nomoreparties.space/orders';

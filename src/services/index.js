@@ -2,6 +2,8 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { rootReducer } from './reducers/root-reducer';
 import { wsMiddleware } from './requests/ws-thunk';
+import { wsUserMiddleware } from './requests/ws-user-thunk';
+import { URL_GET_ORDERS } from './requests/api';
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -13,9 +15,13 @@ const composeEnhancers =
 const enhancer = composeEnhancers(
   applyMiddleware(
     thunk,
-    wsMiddleware('wss://norma.nomoreparties.space/orders/all')
+    wsMiddleware(`${URL_GET_ORDERS}/all`),
+    wsUserMiddleware(
+      `${URL_GET_ORDERS}?token=${
+        sessionStorage.getItem('token').split('Bearer ')[1]
+      }`
+    )
   )
 );
-// const enhancer1 = composeEnhancers(wsMiddleware(thunk));
 
 export const store = createStore(rootReducer, enhancer);

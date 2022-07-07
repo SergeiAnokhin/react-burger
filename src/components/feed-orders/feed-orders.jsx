@@ -7,9 +7,9 @@ import { formatDate } from '../../utils/formatDate';
 import { openIngredientModal } from '../../services/actions/item-actions';
 import styles from './feed-orders.module.css';
 
-export const FeedOrders = () => {
+export const FeedOrders = ({ orders }) => {
   const dispatch = useDispatch();
-  const { orders } = useSelector((store) => store.wsReducer);
+  // const { orders } = useSelector((store) => store.wsReducer);
   const { ingredients } = useSelector((store) => store.ingredientsReducer);
   const location = useLocation();
 
@@ -18,38 +18,38 @@ export const FeedOrders = () => {
   };
 
   return (
-    <div className={styles.feed}>
-      <h1 className={styles.title}>Лента заказов</h1>
-      <div className={styles.orders}>
-        {orders.map((item) => (
-          <Link
-            key={nanoid()}
-            to={{
-              pathname: `/feed/${item._id}`,
-              state: { background: location }
-            }}
-            className={styles.order}
-            onClick={handleClickItem}
-          >
-            <div className={styles.header}>
-              <div className={styles.id}>#{item.number}</div>
-              <div className={styles.date}>{formatDate(item.createdAt)}</div>
-            </div>
-            <h2 className={styles.title}>{item.name}</h2>
-            <div className={styles.info}>
-              <div
-                className={styles.ingredients}
-                style={{
-                  transform: 'translateX(-65px)'
-                }}
-              >
-                {[
-                  ...new Set(
-                    item.ingredients.map((elem) =>
-                      ingredients.find((elem1) => elem === elem1._id)
-                    )
+    <div className={styles.orders}>
+      {orders.map((item) => (
+        <Link
+          key={nanoid()}
+          to={{
+            pathname: `/feed/${item._id}`,
+            state: { background: location }
+          }}
+          className={styles.order}
+          onClick={handleClickItem}
+        >
+          <div className={styles.header}>
+            <div className={styles.id}>#{item.number}</div>
+            <div className={styles.date}>{formatDate(item.createdAt)}</div>
+          </div>
+          <h2 className={styles.title}>{item.name}</h2>
+          <div className={styles.info}>
+            <div
+              className={styles.ingredients}
+              style={{
+                transform: 'translateX(-65px)'
+              }}
+            >
+              {[
+                ...new Set(
+                  item.ingredients.map((elem) =>
+                    ingredients.find((elem1) => elem === elem1._id)
                   )
-                ].map((item1, i) =>
+                )
+              ]
+                .filter((elem2) => elem2)
+                .map((item1, i) =>
                   i < 5 ? (
                     <div
                       key={nanoid()}
@@ -90,21 +90,29 @@ export const FeedOrders = () => {
                     ''
                   )
                 )}
-              </div>
-              <div className={styles.price}>
-                <p className={styles.count}>
-                  {item.ingredients
-                    .map((elem) =>
-                      ingredients.find((elem1) => elem === elem1._id)
-                    )
-                    .reduce((acc, obj) => acc + obj.price, 0)}
-                </p>
-                <CurrencyIcon type="primary" />
-              </div>
             </div>
-          </Link>
-        ))}
-      </div>
+            <div className={styles.price}>
+              <p className={styles.count}>
+                {item.ingredients
+                  .map((elem) =>
+                    ingredients.find((elem1) => elem === elem1._id)
+                  )
+                  .filter((elem2) => elem2)
+                  .reduce((acc, obj) => acc + obj.price, 0)}
+                {/* {console.log(
+                    item.ingredients
+                      .map((elem) =>
+                        ingredients.find((elem1) => elem === elem1._id)
+                      )
+                      .filter((elem2) => elem2)
+                      .reduce((acc, obj) => acc + obj.price, 0)
+                  )} */}
+              </p>
+              <CurrencyIcon type="primary" />
+            </div>
+          </div>
+        </Link>
+      ))}
     </div>
   );
 };
