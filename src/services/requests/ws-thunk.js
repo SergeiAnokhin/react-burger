@@ -37,6 +37,10 @@ export const wsMiddleware = (wsUrl) => (store) => {
       };
     }
 
+    if (type === WS_CONNECTION_CLOSED) {
+      socket.close();
+    }
+
     next(action);
   };
 };

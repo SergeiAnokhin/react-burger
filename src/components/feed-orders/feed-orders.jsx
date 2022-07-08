@@ -111,14 +111,6 @@ export const FeedOrders = ({ orders }) => {
                   )
                   .filter((elem2) => elem2)
                   .reduce((acc, obj) => acc + obj.price, 0)}
-                {/* {console.log(
-                    item.ingredients
-                      .map((elem) =>
-                        ingredients.find((elem1) => elem === elem1._id)
-                      )
-                      .filter((elem2) => elem2)
-                      .reduce((acc, obj) => acc + obj.price, 0)
-                  )} */}
               </p>
               <CurrencyIcon type="primary" />
             </div>

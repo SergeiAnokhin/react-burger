@@ -21,10 +21,8 @@ import {
   OrderPage
 } from '../../pages';
 import { ProtectedRoute } from '../ProtectedRoute/protected-route';
-import { wsConnectionStart } from '../../services/actions/ws-actions';
 import Modal from '../modal/modal';
 import { OrderInfo } from '../order-info/order-info';
-import { URL_GET_ORDERS } from '../../services/requests/api';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -45,10 +43,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(setIngredientsThunk());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(wsConnectionStart(`${URL_GET_ORDERS}/all`));
   }, [dispatch]);
 
   return (

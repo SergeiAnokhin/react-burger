@@ -16,9 +16,8 @@ export const wsConnectionSuccess = (value) => ({
   payload: value
 });
 
-export const wsConnectionClosed = (value) => ({
-  type: WS_CONNECTION_CLOSED,
-  payload: value
+export const wsConnectionClosed = () => ({
+  type: WS_CONNECTION_CLOSED
 });
 
 export const wsConnectionError = (value) => ({

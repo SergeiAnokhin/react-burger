@@ -7,7 +7,10 @@ import { ProtectedRoute } from '../../components/ProtectedRoute/protected-route'
 import { Preloader } from '../../components/preloader/preloader';
 import { FeedOrders } from '../../components/feed-orders/feed-orders';
 import { URL_GET_ORDERS } from '../../services/requests/api';
-import { wsUserConnectionStart } from '../../services/actions/ws-user-actions';
+import {
+  wsUserConnectionStart,
+  wsUserConnectionClosed
+} from '../../services/actions/ws-user-actions';
 import styles from './profile-page.module.css';
 
 export const ProfilePage = () => {
@@ -30,6 +33,9 @@ export const ProfilePage = () => {
         )
       );
     }
+    return () => {
+      dispatch(wsUserConnectionClosed());
+    };
   }, []);
 
   return (
