@@ -6,6 +6,7 @@ import {
 } from '../actions/order-actions';
 import { resetConstructor } from '../actions/constructor-actions';
 import { API_URL } from './api';
+import { getCookie } from '../../utils/cookie';
 
 const checkResponse = (res) => {
   if (res.ok) {
@@ -25,7 +26,7 @@ export const getOrderThunk = (data) =>
           }),
           headers: {
             'Content-type': 'application/json; charset=UTF-8',
-            Authorization: sessionStorage.getItem('token')
+            Authorization: getCookie('token')
           }
         })
           .then(checkResponse)

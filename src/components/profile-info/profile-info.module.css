@@ -10,8 +10,10 @@
 .form {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   margin-top: 140px;
   width: 100%;
+  max-width: 480px;
   gap: 24px;
   animation: visible 0.3s linear;
 }

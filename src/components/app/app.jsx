@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import IngredientDetails from '../ingredient-details/ingredient-details';
@@ -26,12 +26,14 @@ import { OrderInfo } from '../order-info/order-info';
 import { openIngredientModal } from '../../services/actions/item-actions';
 import { openOrderModal } from '../../services/actions/order-actions';
 import { getCookie } from '../../utils/cookie';
+import OrderDetails from '../order-details/order-details';
 
 const App = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const background = location.state?.background;
+  const { open, error } = useSelector((store) => store.orderReducer);
 
   useEffect(() => {
     if (localStorage.getItem('token') && getCookie('token')) {
@@ -40,7 +42,7 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (sessionStorage.getItem('token')) {
+    if (getCookie('token')) {
       setInterval(() => dispatch(refreshTokenThunk()), 300000);
     }
   }, [dispatch]);
@@ -118,6 +120,11 @@ const App = () => {
             <OrderInfo />
           </Modal>
         </Route>
+      )}
+      {open && !error && (
+        <Modal title="" closeModal={closeModal}>
+          <OrderDetails />
+        </Modal>
       )}
     </>
   );
