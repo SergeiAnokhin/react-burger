@@ -11,10 +11,8 @@ const IngredientDetails = () => {
     (store) => store.ingredientsReducer.ingredients
   ).find((elem) => elem._id === itemId);
 
-  const { open } = useSelector((store) => store.itemReducer);
-
   useEffect(() => {
-    !open ? history.replace(`/ingredients/${itemId}`) : '';
+    !ingredient ? history.replace(`/ingredients/${itemId}`) : '';
   }, []);
 
   return !ingredient ? (

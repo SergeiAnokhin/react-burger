@@ -1,43 +1,44 @@
-import {
-  WS_CONNECTION_START,
-  WS_CONNECTION_SUCCESS,
-  WS_CONNECTION_CLOSED,
-  WS_CONNECTION_ERROR,
-  WS_GET_MESSAGE
-} from '../actions/types-actions';
+import { getCookie } from '../../utils/cookie';
 
-export const wsMiddleware = (wsUrl) => (store) => {
+export const wsMiddleware = (wsUrl, wsActions) => (store) => {
   let socket = null;
 
   return (next) => (action) => {
     const { dispatch } = store;
     const { type } = action;
+    const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
 
-    if (type === WS_CONNECTION_START) {
-      socket = new WebSocket(wsUrl);
+    if (type === wsInit) {
+      if (wsUrl.includes('all')) {
+        socket = new WebSocket(wsUrl);
+      } else {
+        socket = new WebSocket(
+          `${wsUrl}?token=${getCookie('token').split('Bearer ')[1]}`
+        );
+      }
     }
 
     if (socket) {
       socket.onopen = (event) => {
-        dispatch({ type: WS_CONNECTION_SUCCESS, payload: event });
+        dispatch({ type: onOpen, payload: event });
       };
 
       socket.onerror = (event) => {
-        dispatch({ type: WS_CONNECTION_ERROR, payload: event });
+        dispatch({ type: onError, payload: event });
       };
 
       socket.onmessage = (event) => {
         const { data } = event;
         const dataObj = JSON.parse(data);
-        dispatch({ type: WS_GET_MESSAGE, payload: dataObj });
+        dispatch({ type: onMessage, payload: dataObj });
       };
 
       socket.onclose = (event) => {
-        dispatch({ type: WS_CONNECTION_CLOSED, payload: event });
+        dispatch({ type: onClose, payload: event });
       };
     }
 
-    if (type === WS_CONNECTION_CLOSED) {
+    if (type === onClose) {
       socket.close();
     }
 

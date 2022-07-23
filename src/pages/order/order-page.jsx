@@ -11,6 +11,7 @@ import {
   wsUserConnectionClosed
 } from '../../services/actions/ws-user-actions';
 import { URL_GET_ORDERS } from '../../services/requests/api';
+import { getCookie } from '../../utils/cookie';
 import styles from './order-page.module.css';
 
 export const OrderPage = () => {
@@ -29,12 +30,10 @@ export const OrderPage = () => {
       };
     }
     if (path === 'profile/orders') {
-      if (sessionStorage.getItem('token')) {
+      if (getCookie('token')) {
         dispatch(
           wsUserConnectionStart(
-            `${URL_GET_ORDERS}?token=${
-              sessionStorage.getItem('token').split('Bearer ')[1]
-            }`
+            `${URL_GET_ORDERS}?token=${getCookie('token').split('Bearer ')[1]}`
           )
         );
         return () => {

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Switch, Route, useLocation } from 'react-router-dom';
+import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { setIngredientsThunk } from '../../services/requests/ingredients-thunk';
@@ -23,14 +23,18 @@ import {
 import { ProtectedRoute } from '../ProtectedRoute/protected-route';
 import Modal from '../modal/modal';
 import { OrderInfo } from '../order-info/order-info';
+import { openIngredientModal } from '../../services/actions/item-actions';
+import { openOrderModal } from '../../services/actions/order-actions';
+import { getCookie } from '../../utils/cookie';
 
 const App = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const location = useLocation();
   const background = location.state?.background;
 
   useEffect(() => {
-    if (localStorage.getItem('token') && sessionStorage.getItem('token')) {
+    if (localStorage.getItem('token') && getCookie('token')) {
       dispatch(getUserInfoThunk());
     }
   }, [dispatch]);
@@ -44,6 +48,13 @@ const App = () => {
   useEffect(() => {
     dispatch(setIngredientsThunk());
   }, [dispatch]);
+
+  const closeModal = () => {
+    const path = history.location.pathname.split('/').slice(1, -1).join('/');
+    dispatch(openIngredientModal(false));
+    dispatch(openOrderModal(false));
+    history.replace(path === 'ingredients' ? '/' : `/${path}`);
+  };
 
   return (
     <>
@@ -79,7 +90,7 @@ const App = () => {
         <Route path="/reset-password" exact>
           <ResetPasswordPage />
         </Route>
-        <Route path="/ingredients/:id">
+        <Route path="/ingredients/:id" exact>
           <IngredientPage />
         </Route>
         <Route path="*">
@@ -89,21 +100,21 @@ const App = () => {
 
       {background && (
         <Route path="/ingredients/:id">
-          <Modal title="Детали ингредиента">
+          <Modal title="Детали ингредиента" closeModal={closeModal}>
             <IngredientDetails />
           </Modal>
         </Route>
       )}
       {background && (
         <Route path="/feed/:id">
-          <Modal title="">
+          <Modal title="" closeModal={closeModal}>
             <OrderInfo />
           </Modal>
         </Route>
       )}
       {background && (
         <Route path="/profile/orders/:id">
-          <Modal title="">
+          <Modal title="" closeModal={closeModal}>
             <OrderInfo />
           </Modal>
         </Route>

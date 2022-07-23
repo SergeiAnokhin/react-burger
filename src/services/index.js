@@ -2,8 +2,9 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { rootReducer } from './reducers/root-reducer';
 import { wsMiddleware } from './requests/ws-thunk';
-import { wsUserMiddleware } from './requests/ws-user-thunk';
 import { URL_GET_ORDERS } from './requests/api';
+import { wsActions } from './actions/ws-actions';
+import { wsUserActions } from './actions/ws-user-actions';
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -15,8 +16,8 @@ const composeEnhancers =
 const enhancer = composeEnhancers(
   applyMiddleware(
     thunk,
-    wsMiddleware(`${URL_GET_ORDERS}/all`),
-    wsUserMiddleware()
+    wsMiddleware(`${URL_GET_ORDERS}/all`, wsActions),
+    wsMiddleware(URL_GET_ORDERS, wsUserActions)
   )
 );
 

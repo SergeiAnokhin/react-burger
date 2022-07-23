@@ -1,5 +1,6 @@
 import { Redirect, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { getCookie } from '../../utils/cookie';
 
 export const ProtectedRoute = ({ children, ...rest }) => {
   const user = useSelector((state) => state.userReducer);
@@ -8,7 +9,7 @@ export const ProtectedRoute = ({ children, ...rest }) => {
     <Route
       {...rest}
       render={({ location }) =>
-        sessionStorage.getItem('token') && !user.error ? (
+        getCookie('token') && !user.error ? (
           children
         ) : (
           <Redirect

@@ -11,6 +11,7 @@ import {
   wsUserConnectionStart,
   wsUserConnectionClosed
 } from '../../services/actions/ws-user-actions';
+import { getCookie } from '../../utils/cookie';
 import styles from './profile-page.module.css';
 
 export const ProfilePage = () => {
@@ -24,13 +25,9 @@ export const ProfilePage = () => {
   };
 
   useEffect(() => {
-    if (sessionStorage.getItem('token')) {
+    if (getCookie('token')) {
       dispatch(
-        wsUserConnectionStart(
-          `${URL_GET_ORDERS}?token=${
-            sessionStorage.getItem('token').split('Bearer ')[1]
-          }`
-        )
+        wsUserConnectionStart(`${URL_GET_ORDERS}?token=${getCookie('token')}`)
       );
     }
     return () => {
