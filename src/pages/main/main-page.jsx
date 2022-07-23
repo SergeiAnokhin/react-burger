@@ -12,14 +12,9 @@ export const MainPage = () => {
     loading: isLoadingIngredients,
     error: hasErrorIngredients
   } = useSelector((state) => state.ingredientsReducer);
-  const isIngredientDetailsOpened = useSelector(
-    (store) => store.itemReducer.open
+  const { loading: isLoadingOrder } = useSelector(
+    (state) => state.orderReducer
   );
-  const {
-    loading: isLoadingOrder,
-    error: hasErrorOrder,
-    open: isOrderDetailsOpened
-  } = useSelector((state) => state.orderReducer);
 
   return (
     <>
@@ -29,16 +24,6 @@ export const MainPage = () => {
         ''
       )}
       {!hasErrorIngredients && ingredients.length && <AppMain />}
-      {!hasErrorIngredients && isIngredientDetailsOpened && (
-        <Modal title="Детали ингредиента">
-          <IngredientDetails />
-        </Modal>
-      )}
-      {!hasErrorOrder && isOrderDetailsOpened && (
-        <Modal title="">
-          <OrderDetails />
-        </Modal>
-      )}
     </>
   );
 };
